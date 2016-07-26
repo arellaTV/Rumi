@@ -1,3 +1,5 @@
+'use strict';
+
 let http = require('http');
 let socketIo = require('socket.io');
 let Task = require('./models/Task');
