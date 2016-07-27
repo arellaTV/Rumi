@@ -28,12 +28,11 @@ class AddTask extends Component {
     }
 
     this.state.duedate = new Date(Date.now() + this.state.taskInterval);
-    console.log('made it!', this.state.duedate);
   }
 
   onSubmit() {
     this.calcDueDateAndInterval();
-    console.log('submitted!');
+    // insert socket emit logic here
   }
 
   render() {
@@ -42,33 +41,33 @@ class AddTask extends Component {
         <Text style={{margin: 10, fontSize: 15, textAlign: 'right'}}>New Task</Text>
 
         <Text>Name:</Text>
-        <TextInput
-          style={styles.input}
-          onChangeText={(text) => this.setState({name: text})}/>
+          <TextInput
+            style={styles.input}
+            onChangeText={(text) => this.setState({name: text})}/>
 
         <Text>Recurrance:</Text>
-        <View style={styles.recurrance}>
-          <TextInput
-            style={{width: 50}}
-            keyboardType = 'numeric'
-            onChangeText={(num) => this.setState({interval: num})}/>
-          <Picker
-            style={{width: 100}}
-            selectedValue={this.state.recurranceVal}
-            onValueChange={(val) => this.setState({recurranceVal: val})}>
-            <Picker.Item label='hour(s)' value={0} />
-            <Picker.Item label='day(s)' value={1} />
-          </Picker>
-        </View>
+          <View style={styles.recurrance}>
+            <TextInput
+              style={{width: 50}}
+              keyboardType = 'numeric'
+              onChangeText={(num) => this.setState({interval: num})}/>
+            <Picker
+              style={{width: 100}}
+              selectedValue={this.state.recurranceVal}
+              onValueChange={(val) => this.setState({recurranceVal: val})}>
+              <Picker.Item label='hour(s)' value={0} />
+              <Picker.Item label='day(s)' value={1} />
+            </Picker>
+          </View>
 
         <Text>Details:</Text>
-        <TextInput
-          style={styles.input}
-          onChangeText={(text) => this.setState({details: text})}
-          multiline={true}/>
-        <TouchableNativeFeedback onPress={this.onSubmit.bind(this)}>
-          <View style={{width: 50, height: 25, backgroundColor: 'grey'}}></View>
-        </TouchableNativeFeedback>
+          <TextInput
+            style={styles.input}
+            onChangeText={(text) => this.setState({details: text})}
+            multiline={true}/>
+          <TouchableNativeFeedback onPress={this.onSubmit.bind(this)}>
+            <View style={{width: 50, height: 25, backgroundColor: 'grey'}}></View>
+          </TouchableNativeFeedback>
       </View>
     );
   }
