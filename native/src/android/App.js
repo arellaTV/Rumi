@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import {
-  StyleSheet,
-  View,
-  Text,
+  Navigator,
   DrawerLayoutAndroid
 } from 'react-native';
 import MenuBar from './resources/stateless/MenuBar';
+import TaskList from './resources/TaskList/TaskListView';
 
 class App extends Component {
   render() {
@@ -13,12 +12,8 @@ class App extends Component {
     <DrawerLayoutAndroid
       drawerWidth={300}
       drawerPosition={DrawerLayoutAndroid.positions.Right}
-      renderNavigationView={MenuBar}>
-      {/* Temporary 'Main' component */}
-      <View style={{flex: 1, alignItems: 'center'}}>
-        <Text style={{margin: 10, fontSize: 15, textAlign: 'right'}}>Hello</Text>
-        <Text style={{margin: 10, fontSize: 15, textAlign: 'right'}}>World!</Text>
-      </View>
+      renderNavigationView={() => <MenuBar />}>
+      <TaskList />
     </DrawerLayoutAndroid>
     );
   }
