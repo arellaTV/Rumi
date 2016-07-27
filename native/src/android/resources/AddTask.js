@@ -1,26 +1,38 @@
 import React, { Component } from 'react';
-import {
-  StyleSheet,
-  View,
-  Text,
-  TextInput,
-  Picker,
-  TouchableNativeFeedback,
-  Image
-} from 'react-native';
+import { StyleSheet, View, Text, TextInput, Picker, TouchableNativeFeedback, Image } from 'react-native';
 
 class AddTask extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: '',
-      details: '',
       interval: '0',
-      recurrance: 'hours'
+      recurranceVal: 0,
+      name: '',
+      duedate: '',
+      details: '',
+      taskInterval: 0
     }
   }
 
+  calcDueDateAndInterval() {
+    let hours = n => 1000*60*60*n;
+    let days = n => hours(n) * 24;
+
+    let n = Number(this.state.interval);
+
+    // 1 = hours; 2 = days
+    if (this.state.intervalVal === 1) {
+      this.state.taskInterval = hours(n);
+    } else if (this.state.intervalVal === 2) {
+      this.state.taskInterval = days(n);
+    }
+
+    this.state.duedate = new Date(Date.now() + this.state.taskInterval);
+    console.log('made it!', this.state.duedate);
+  }
+
   onSubmit() {
+    this.calcDueDateAndInterval();
     console.log('submitted!');
   }
 
@@ -28,31 +40,33 @@ class AddTask extends Component {
     return (
       <View style={{alignItems: 'center', backgroundColor: 'lightgrey'}}>
         <Text style={{margin: 10, fontSize: 15, textAlign: 'right'}}>New Task</Text>
+
         <Text>Name:</Text>
         <TextInput
           style={styles.input}
           onChangeText={(text) => this.setState({name: text})}/>
+
         <Text>Recurrance:</Text>
         <View style={styles.recurrance}>
           <TextInput
             style={{width: 50}}
             keyboardType = 'numeric'
-            onChangeText={(num) => this.setState({number: num})}
-            value={this.state.interval}/>
+            onChangeText={(num) => this.setState({interval: num})}/>
           <Picker
             style={{width: 100}}
-            selectedValue={this.state.recurrance}
-            onValueChange={(recurrance) => this.setState({recurrance: recurrance})}>
-            <Picker.Item label='hour(s)' value='hours' />
-            <Picker.Item label='day(s)' value='days' />
+            selectedValue={this.state.recurranceVal}
+            onValueChange={(val) => this.setState({recurranceVal: val})}>
+            <Picker.Item label='hour(s)' value={0} />
+            <Picker.Item label='day(s)' value={1} />
           </Picker>
         </View>
+
         <Text>Details:</Text>
         <TextInput
           style={styles.input}
           onChangeText={(text) => this.setState({details: text})}
           multiline={true}/>
-        <TouchableNativeFeedback onPress={this.onSubmit}>
+        <TouchableNativeFeedback onPress={this.onSubmit.bind(this)}>
           <View style={{width: 50, height: 25, backgroundColor: 'grey'}}></View>
         </TouchableNativeFeedback>
       </View>
