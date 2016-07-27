@@ -77,14 +77,20 @@ class Router extends Component {
       );
   }
   _renderScene(sceneProps) {
-    return (
-      <TaskScene
+    if (!this.props.loggedIn) {
+      return (
+        <Text>{'You aren\'t logged in, yo!'}</Text>
+      )
+    } else {
+      return (
+        <TaskScene
         route={sceneProps.scene.route}
         onPushRoute={this._onPushRoute}
         onPopRoute={this._onPopRoute}
         onExit={this.props.onExit}
-      />
-    );
+        />
+      );
+    }
   }
 }
 
