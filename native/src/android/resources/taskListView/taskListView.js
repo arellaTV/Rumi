@@ -12,7 +12,8 @@ class TaskListView extends Component {
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
       dataSource: ds.cloneWithRows([
-        'John', 'Joel', 'James', 'Jimmy', 'Jackson', 'Jillian', 'Julie', 'Devin'
+        {"id": 1, "name": "Do Dishes", "due": "Tomorrow"},
+        {"id": 2, "name": "Wash Laundry", "due": "Friday"}
       ])
     };
   }
@@ -21,7 +22,13 @@ class TaskListView extends Component {
       <View style={{paddingTop: 22}}>
         <ListView
           dataSource={this.state.dataSource}
-          renderRow={(rowData) => <Text>{rowData}</Text>}
+          renderRow={(rowData) => 
+            <Text>
+              {rowData.id} 
+              {rowData.name} 
+              {rowData.due}
+            </Text>
+          }
         />
       </View>
     );
