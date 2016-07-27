@@ -1,15 +1,22 @@
 import React, { Component } from 'react';
 import {
+  BackAndroid,
   DrawerLayoutAndroid,
   NavigationExperimental as Navigator,
   TouchableHighlight,
-  Text
+  Text,
+  View
 } from 'react-native';
 
 import MenuBar from './resources/stateless/MenuBar';
 import TaskList from './resources/TaskList/TaskListView';
 
-class TappableRow extends Component {
+var {
+  CardStack,
+  StateUtils
+} = Navigator;
+
+class TappableRow extends React.Component {
   render() {
     return (
       <TouchableHighlight
@@ -23,6 +30,64 @@ class TappableRow extends Component {
   }
 }
 
+class TaskScene extends Component {
+  render() {
+    return (
+      <DrawerLayoutAndroid
+        drawerWidth={300}
+        drawerPosition={DrawerLayoutAndroid.positions.Right}
+        renderNavigationView={() => <MenuBar />}>
+        <Text>
+          Route: {this.props.route.key}
+        </Text>
+        <TappableRow text="Task 1" onPress={this.props.onPushRoute}/>
+        <TappableRow text="Task 2" onPress={this.props.onPushRoute}/>
+        <TaskList />
+      </DrawerLayoutAndroid>
+    )
+  }
+}
+
+class Router extends Component {
+  constructor(props, context) {
+    super(props, context);
+    // Goes backwards on screnes until back to main page
+    BackAndroid.addEventListener('hardwareBackPress', () => {
+      if (this.props.navigationState.routes.length === 1) {
+        return false;
+      }
+      this._onPopRoute();
+      return true;
+    });
+
+    this._onPushRoute = this.props.onNavigationChange.bind(null, 'push');
+    this._onPopRoute = this.props.onNavigationChange.bind(null, 'pop');
+    // bind your functions in the constructor
+    // this makes it so you don't have to worry about it elsewhere
+    this._renderScene = this._renderScene.bind(this);
+  }
+  render() {
+    // creates a navigator that pops on backbutton
+    return (
+      <CardStack
+        onNavigateBack={this._onPopRoute}
+        navigationState={this.props.navigationState}
+        renderScene={this._renderScene}
+        />
+      );
+  }
+  _renderScene(sceneProps) {
+    return (
+      <TaskScene
+        route={sceneProps.scene.route}
+        onPushRoute={this._onPushRoute}
+        onPopRoute={this._onPopRoute}
+        onExit={this.props.onExit}
+      />
+    );
+  }
+}
+
 class App extends Component {
   constructor(props, context) {
     super(props, context);
@@ -32,6 +97,7 @@ class App extends Component {
         routes: [{key: 'Task List'}]
       }
     };
+    this._onNavigationChange = this._onNavigationChange.bind(this);
   }
 
   _onNavigationChange(type) {
@@ -39,30 +105,23 @@ class App extends Component {
     switch(type) {
       case 'push':
         const route = {key: 'Route-' + Date.now()};
-        navigationState = NavigationStateUtils.push(navigationState, route);
+        navigationState = StateUtils.push(navigationState, route);
         break;
       case 'pop':
-        navigationState = NavigationStateUtils.pop(navigationState);
+        navigationState = StateUtils.pop(navigationState);
         break;
     }
     if (this.state.navigationState !== navigationState) {
-      this.setState(navigationState);
+      this.setState({navigationState});
     }
   }
 
   render() {
     return (
-      <DrawerLayoutAndroid
-        drawerWidth={300}
-        drawerPosition={DrawerLayoutAndroid.positions.Right}
-        renderNavigationView={() => <MenuBar />}>
-        <Text>
-          Route: {this.state.navigationState.routes[this.state.navigationState.index].key}
-        </Text>
-        <TappableRow text="Tap me to go to next screen" onPress={() => console.log('pressme')}/>
-        <TappableRow text="Tap me to go back" onPress={() => console.log('pressme')}/>
-        <TaskList />
-      </DrawerLayoutAndroid>
+      <Router
+        onNavigationChange={this._onNavigationChange}
+        navigationState={this.state.navigationState}
+      />
     );
   }
 }

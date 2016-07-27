@@ -1,7 +1,8 @@
 import React from 'react';
 import {
   View,
-  Text
+  Text,
+  TouchableHighlight
 } from 'react-native';
 
 export default class TaskList extends React.Component {
