@@ -25,6 +25,11 @@ function decorate(app, session) {
     }
     console.log('connected');
 
+    socket.on('message', function(data) {
+      console.log('----------------------------------');
+      console.log('MESSAGE RECEIVED! Message is', data);
+    });
+
     socket.on('create task', createTask);
     // socket.on('read task', readTask);
     socket.on('update task', updateTask);
