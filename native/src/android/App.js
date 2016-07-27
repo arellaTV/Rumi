@@ -1,17 +1,11 @@
 import React, { Component } from 'react';
 import {
-  AppRegistry,
+  StyleSheet,
   View,
   Text,
-  StyleSheet,
   DrawerLayoutAndroid
 } from 'react-native';
-
-var navigationView = (
-  <View style={{flex: 1, backgroundColor: '#fff'}}>
-    <Text style={{margin: 10, fontSize: 15, textAlign: 'left'}}>{"I'm in the Drawer!"}</Text>
-  </View>
-);
+import MenuBar from './resources/stateless/MenuBar';
 
 class App extends Component {
   render() {
@@ -19,7 +13,8 @@ class App extends Component {
     <DrawerLayoutAndroid
       drawerWidth={300}
       drawerPosition={DrawerLayoutAndroid.positions.Right}
-      renderNavigationView={() => navigationView}>
+      renderNavigationView={MenuBar}>
+      {/* Temporary 'Main' component */}
       <View style={{flex: 1, alignItems: 'center'}}>
         <Text style={{margin: 10, fontSize: 15, textAlign: 'right'}}>Hello</Text>
         <Text style={{margin: 10, fontSize: 15, textAlign: 'right'}}>World!</Text>
