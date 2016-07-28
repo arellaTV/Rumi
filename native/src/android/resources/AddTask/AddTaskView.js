@@ -35,8 +35,12 @@ class AddTask extends Component {
   onSubmit() {
     this.calcDueDateAndInterval();
     // insert socket emit logic here
-    console.log('submitted!');
-    socket.emit('message', { meow: 'meow'});
+
+    socket.emit('create task', {
+      name: this.state.name,
+      dueBy: this.state.duedate,
+      interval: this.state.taskInterval
+    });
   }
 
   render() {

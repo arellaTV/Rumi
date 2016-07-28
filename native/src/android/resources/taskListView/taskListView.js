@@ -67,7 +67,7 @@ class TaskListView extends Component {
               background={TouchableNativeFeedback.SelectableBackground()}>
               <View style={styles.taskCard}>
                 <Text style={styles.titleText}> {rowData.name} </Text>
-                <Text style={styles.baseText}> Due: {rowData.due} </Text>
+                <Text style={styles.baseText}> Due: {rowData.dueBy} </Text>
                 <Text style={styles.baseText}> Last completed by NAME </Text>
               </View>
             </TouchableNativeFeedback>
