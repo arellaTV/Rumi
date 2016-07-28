@@ -101,7 +101,6 @@ class TaskListView extends Component {
 
   render() {
     var tasks = [this.state.overdueTasks, this.state.urgentTasks, this.state.overdueTasks];
-    console.log(tasks);
     return (
       <View style={styles.taskList}>
         <ListView
@@ -111,7 +110,7 @@ class TaskListView extends Component {
             (category) => {
               return (
                 <View>
-                  <Text>'test'</Text>
+                  <Text>hello</Text>
                   {category.map((task) =>
                     <Task task={task}/>
                   )}
@@ -126,10 +125,3 @@ class TaskListView extends Component {
 }
 
 export default TaskListView;
-
-// <Text>Overdue</Text>
-// <TaskCategory category={this.state.overdueTasks}/>
-// <Text>Urgent</Text>
-// <TaskCategory category={this.state.urgentTasks}/>
-// <Text>Upcoming</Text>
-// <TaskCategory category={this.state.upcomingTasks}/>
