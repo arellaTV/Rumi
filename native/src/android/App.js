@@ -120,10 +120,12 @@ class App extends Component {
 
   render() {
     return (
-      <Router
-        onNavigationChange={this._onNavigationChange}
-        navigationState={this.state.navigationState}
-      />
+      <View>
+        <Router
+          onNavigationChange={this._onNavigationChange}
+          navigationState={this.state.navigationState}
+          />
+      </View>
     );
   }
 }

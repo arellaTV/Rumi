@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Text, TextInput, Picker, TouchableNativeFeedback, Image } from 'react-native';
-var socket = require('socket.io-client')();
+// import io from '/../socket.io-client/socket.io';
 
 class AddTask extends Component {
   constructor(props) {
