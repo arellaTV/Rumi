@@ -100,9 +100,13 @@ class TaskListView extends Component {
   }
 
   render() {
+    var overdueTasks;
+    if (this.state.overdueTasks.length) {
+      overdueTasks =
+        <TaskCategory category={this.state.overdueTasks}/>
+    }
     return (
       <View style={styles.taskList}>
-
         <ListView
           dataSource={this.state.dataSource}
           enableEmptySections={true}
@@ -123,18 +127,17 @@ class TaskListView extends Component {
             </View>
           }
         />
-
-      <Text>Completed</Text>
-        <TaskCategory category={this.state.completedTasks}/>
-      <Text>Overdue</Text>
-        <TaskCategory category={this.state.overdueTasks}/>
-      <Text>Urgent</Text>
-        <TaskCategory category={this.state.urgentTasks}/>
-      <Text>Upcoming</Text>
-        <TaskCategory category={this.state.upcomingTasks}/>
+        {overdueTasks}
       </View>
     );
   }
 }
 
 export default TaskListView;
+
+// <Text>Overdue</Text>
+// <TaskCategory category={this.state.overdueTasks}/>
+// <Text>Urgent</Text>
+// <TaskCategory category={this.state.urgentTasks}/>
+// <Text>Upcoming</Text>
+// <TaskCategory category={this.state.upcomingTasks}/>
