@@ -8,6 +8,7 @@ import {
   View
 } from 'react-native';
 import socket from '../../socketClient';
+import TaskCategory from './TaskItem'
 
 const styles = StyleSheet.create({
   taskList: {
@@ -122,78 +123,15 @@ class TaskListView extends Component {
             </View>
           }
         />
+
       <Text>Completed</Text>
-        <ListView
-          dataSource={this.ds.cloneWithRows(this.state.completedTasks)}
-          enableEmptySections={true}
-          renderRow={(rowData) =>
-            <View>
-              <TouchableNativeFeedback
-                onPress={this._onPressButton}
-                background={TouchableNativeFeedback.SelectableBackground()}>
-                <View style={styles.taskCard}>
-                  <Text style={styles.titleText}> {rowData.name} </Text>
-                  <Text style={styles.baseText}> Due: {rowData.dueBy} </Text>
-                  <Text style={styles.baseText}> Last completed by NAME </Text>
-                </View>
-              </TouchableNativeFeedback>
-            </View>
-          }
-        />
+        <TaskCategory category={this.state.completedTasks}/>
       <Text>Overdue</Text>
-        <ListView
-          dataSource={this.ds.cloneWithRows(this.state.overdueTasks)}
-          enableEmptySections={true}
-          renderRow={(rowData) =>
-            <View>
-              <TouchableNativeFeedback
-                onPress={this._onPressButton}
-                background={TouchableNativeFeedback.SelectableBackground()}>
-                <View style={styles.taskCard}>
-                  <Text style={styles.titleText}> {rowData.name} </Text>
-                  <Text style={styles.baseText}> Due: {rowData.dueBy} </Text>
-                  <Text style={styles.baseText}> Last completed by NAME </Text>
-                </View>
-              </TouchableNativeFeedback>
-            </View>
-          }
-        />
+        <TaskCategory category={this.state.overdueTasks}/>
       <Text>Urgent</Text>
-        <ListView
-          dataSource={this.ds.cloneWithRows(this.state.urgentTasks)}
-          enableEmptySections={true}
-          renderRow={(rowData) =>
-            <View>
-              <TouchableNativeFeedback
-                onPress={this._onPressButton}
-                background={TouchableNativeFeedback.SelectableBackground()}>
-                <View style={styles.taskCard}>
-                  <Text style={styles.titleText}> {rowData.name} </Text>
-                  <Text style={styles.baseText}> Due: {rowData.dueBy} </Text>
-                  <Text style={styles.baseText}> Last completed by NAME </Text>
-                </View>
-              </TouchableNativeFeedback>
-            </View>
-          }
-        />
+        <TaskCategory category={this.state.urgentTasks}/>
       <Text>Upcoming</Text>
-        <ListView
-          dataSource={this.ds.cloneWithRows(this.state.upcomingTasks)}
-          enableEmptySections={true}
-          renderRow={(rowData) =>
-            <View>
-              <TouchableNativeFeedback
-                onPress={this._onPressButton}
-                background={TouchableNativeFeedback.SelectableBackground()}>
-                <View style={styles.taskCard}>
-                  <Text style={styles.titleText}> {rowData.name} </Text>
-                  <Text style={styles.baseText}> Due: {rowData.dueBy} </Text>
-                  <Text style={styles.baseText}> Last completed by NAME </Text>
-                </View>
-              </TouchableNativeFeedback>
-            </View>
-          }
-        />
+        <TaskCategory category={this.state.upcomingTasks}/>
       </View>
     );
   }
