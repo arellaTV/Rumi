@@ -1,52 +1,15 @@
 import React, { Component } from 'react';
+import TaskScene from './resources/TaskScene/TaskScene';
 import {
   BackAndroid,
-  DrawerLayoutAndroid,
   NavigationExperimental as Navigator,
-  TouchableHighlight,
-  Text,
-  View
+  Text
 } from 'react-native';
-
-import MenuBar from './resources/stateless/MenuBar';
-import TaskList from './resources/TaskList/TaskListView';
 
 var {
   CardStack,
   StateUtils
 } = Navigator;
-
-class TappableRow extends React.Component {
-  render() {
-    return (
-      <TouchableHighlight
-        underlayColor="#D0D0D0"
-        onPress={this.props.onPress}>
-        <Text>
-          {this.props.text}
-        </Text>
-      </TouchableHighlight>
-    )
-  }
-}
-
-class TaskScene extends Component {
-  render() {
-    return (
-      <DrawerLayoutAndroid
-        drawerWidth={300}
-        drawerPosition={DrawerLayoutAndroid.positions.Right}
-        renderNavigationView={() => <MenuBar />}>
-        <Text>
-          Route: {this.props.route.key}
-        </Text>
-        <TappableRow text="Task 1" onPress={this.props.onPushRoute}/>
-        <TappableRow text="Task 2" onPress={this.props.onPushRoute}/>
-        <TaskList />
-      </DrawerLayoutAndroid>
-    )
-  }
-}
 
 class Router extends Component {
   constructor(props, context) {
@@ -84,10 +47,10 @@ class Router extends Component {
     } else {
       return (
         <TaskScene
-        route={sceneProps.scene.route}
-        onPushRoute={this._onPushRoute}
-        onPopRoute={this._onPopRoute}
-        onExit={this.props.onExit}
+          route={sceneProps.scene.route}
+          onPushRoute={this._onPushRoute}
+          onPopRoute={this._onPopRoute}
+          onExit={this.props.onExit}
         />
       );
     }
