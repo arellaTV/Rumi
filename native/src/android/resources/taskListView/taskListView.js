@@ -51,7 +51,6 @@ class TaskListView extends Component {
   componentDidMount() {
     var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     socket.on('sending all tasks', (data) => {
-      console.log('emitting from task lists', data);
       this.setState({
         dataSource: ds.cloneWithRows(data)
       });
@@ -101,6 +100,7 @@ class TaskListView extends Component {
         />
         <ListView
           dataSource={ds.cloneWithRows(this.state.completedTasks)}
+          enableEmptySections={true}
           renderRow={(rowData) =>
             <View>
               <TouchableNativeFeedback
@@ -121,21 +121,3 @@ class TaskListView extends Component {
 }
 
 export default TaskListView;
-
-// <ListView
-//   dataSource={this.state.completedTasks}
-//   renderRow={(rowData) =>
-//     <View>
-//       <TouchableNativeFeedback
-//         onPress={this._onPressButton}
-//         background={TouchableNativeFeedback.SelectableBackground()}>
-//         <View style={styles.taskCard}>
-//           <Text style={styles.titleText}> {rowData.name} </Text>
-//           <Text style={styles.baseText}> Due: {rowData.dueBy} </Text>
-//           <Text style={styles.baseText}> Last completed by NAME </Text>
-//         </View>
-//       </TouchableNativeFeedback>
-//     </View>
-//   }
-//   />
-// </View>
