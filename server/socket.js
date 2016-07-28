@@ -16,21 +16,23 @@ let Completed = require('./models/Completed');
 function decorate(app, session) {
   let server = http.Server(app);
   let io = socketIo(server);
-  io.use((socket, next) => {
-    session(socket.request, socket.request.res, next);
-  });
+  // io.use((socket, next) => {
+  //   session(socket.request, socket.request.res, next);
+  // });
   io.on('connection', socket => {
-    if (!socket.request.session.passport) {
-      return socket.emit('rumi error', {message: 'Please reauthenticate'});
-    }
+    // if (!socket.request.session.passport) {
+    //   return socket.emit('rumi error', {message: 'Please reauthenticate'});
+    // }
     console.log('connected');
-
+    socket.on('message', function(data) {
+      console.log(data);
+    });
     socket.on('create task', createTask);
     // socket.on('read task', readTask);
     socket.on('update task', updateTask);
     socket.on('archive task', archiveTask);
     socket.on('unarchive task', notYetImplemented.bind(null, 'unarchive task'));
-    socket.on('complete task', completeTask(socket.request.session.passport.user));
+    // socket.on('complete task', completeTask(socket.request.session.passport.user));
 
     socket.on('get all tasks', getAllTasks(socket));
     socket.on('get completeds', getCompleteds(socket));

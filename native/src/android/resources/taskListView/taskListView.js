@@ -6,6 +6,7 @@ import {
   TouchableNativeFeedback,
   View
 } from 'react-native';
+import socket from '../../socketClient';
 
 const styles = StyleSheet.create({
   taskList: {
@@ -33,7 +34,6 @@ class TaskListView extends Component {
   constructor(props) {
     super(props);
     var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-
     this.state = {
       dataSource: ds.cloneWithRows([
         {"id": 1, "name": "Do Dishes", "due": "Tomorrow"},
@@ -42,12 +42,26 @@ class TaskListView extends Component {
     };
   }
 
+  componentWillMount() {
+    socket.emit('get all tasks');
+  }
+
+  componentDidMount() {
+    var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+    socket.on('sending all tasks', (data) => {
+      console.log('emitting from task lists', data);
+      this.setState({
+        dataSource: ds.cloneWithRows(data)
+      });
+    });
+  }
+
   render() {
     return (
       <View style={styles.taskList}>
         <ListView
           dataSource={this.state.dataSource}
-          renderRow={(rowData) => 
+          renderRow={(rowData) =>
             <TouchableNativeFeedback
               onPress={this._onPressButton}
               background={TouchableNativeFeedback.SelectableBackground()}>
