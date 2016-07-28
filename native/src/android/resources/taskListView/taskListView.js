@@ -81,6 +81,7 @@ class TaskListView extends Component {
 
         <ListView
           dataSource={this.state.dataSource}
+          enableEmptySections={true}
           renderRow={(rowData) =>
             <View>
               <TouchableNativeFeedback
