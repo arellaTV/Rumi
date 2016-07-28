@@ -34,12 +34,15 @@ const styles = StyleSheet.create({
 class TaskListView extends Component {
   constructor(props) {
     super(props);
-    var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+    this.ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
-      dataSource: ds.cloneWithRows([
+      dataSource: this.ds.cloneWithRows([
         {"id": 1, "name": "Do Dishes", "due": "Tomorrow"},
         {"id": 2, "name": "Wash Laundry", "due": "Friday"}
       ]),
+      overdueTasks: [],
+      urgentTasks: [],
+      upcomingTasks: [],
       completedTasks: []
     };
   }
@@ -49,16 +52,37 @@ class TaskListView extends Component {
   }
 
   componentDidMount() {
-    var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     socket.on('sending all tasks', (data) => {
+      var sortedTasks = this.prioritizeTasks(data);
       this.setState({
-        dataSource: ds.cloneWithRows(data)
+        dataSource: this.ds.cloneWithRows(data),
+        overdueTasks: sortedTasks.overdue,
+        urgentTasks: sortedTasks.urgent,
+        upcomingTasks: sortedTasks.upcoming
       });
     });
   }
 
+  prioritizeTasks(allTasks) {
+    let tasks = { upcoming: [], urgent: [], overdue: [] };
+    let now = Date.now();
+
+    allTasks.forEach(t => {
+      let timeLeft = Date.parse(t.dueBy) - now;
+
+      if (timeLeft < 0) {
+        return tasks.overdue.push(t);
+      } else if (timeLeft < t.interval / 2) {
+        return tasks.urgent.push(t);
+      } else {
+        return tasks.upcoming.push(t);
+      }
+    });
+
+    return tasks;
+  }
+
   onDismissal(e) {
-    var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     socket.emit('get all tasks');
     socket.on('sending all tasks', (data) => {
       for (var i = 0; i < data.length; i++) {
@@ -68,14 +92,13 @@ class TaskListView extends Component {
       }
       this.state.completedTasks.unshift(e);
       this.setState({
-        dataSource: ds.cloneWithRows(data),
+        dataSource: this.ds.cloneWithRows(data),
         completedTasks: this.state.completedTasks
       });
     });
   }
 
   render() {
-    var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     return (
       <View style={styles.taskList}>
 
@@ -99,8 +122,63 @@ class TaskListView extends Component {
             </View>
           }
         />
+      <Text>Completed</Text>
         <ListView
-          dataSource={ds.cloneWithRows(this.state.completedTasks)}
+          dataSource={this.ds.cloneWithRows(this.state.completedTasks)}
+          enableEmptySections={true}
+          renderRow={(rowData) =>
+            <View>
+              <TouchableNativeFeedback
+                onPress={this._onPressButton}
+                background={TouchableNativeFeedback.SelectableBackground()}>
+                <View style={styles.taskCard}>
+                  <Text style={styles.titleText}> {rowData.name} </Text>
+                  <Text style={styles.baseText}> Due: {rowData.dueBy} </Text>
+                  <Text style={styles.baseText}> Last completed by NAME </Text>
+                </View>
+              </TouchableNativeFeedback>
+            </View>
+          }
+        />
+      <Text>Overdue</Text>
+        <ListView
+          dataSource={this.ds.cloneWithRows(this.state.overdueTasks)}
+          enableEmptySections={true}
+          renderRow={(rowData) =>
+            <View>
+              <TouchableNativeFeedback
+                onPress={this._onPressButton}
+                background={TouchableNativeFeedback.SelectableBackground()}>
+                <View style={styles.taskCard}>
+                  <Text style={styles.titleText}> {rowData.name} </Text>
+                  <Text style={styles.baseText}> Due: {rowData.dueBy} </Text>
+                  <Text style={styles.baseText}> Last completed by NAME </Text>
+                </View>
+              </TouchableNativeFeedback>
+            </View>
+          }
+        />
+      <Text>Urgent</Text>
+        <ListView
+          dataSource={this.ds.cloneWithRows(this.state.urgentTasks)}
+          enableEmptySections={true}
+          renderRow={(rowData) =>
+            <View>
+              <TouchableNativeFeedback
+                onPress={this._onPressButton}
+                background={TouchableNativeFeedback.SelectableBackground()}>
+                <View style={styles.taskCard}>
+                  <Text style={styles.titleText}> {rowData.name} </Text>
+                  <Text style={styles.baseText}> Due: {rowData.dueBy} </Text>
+                  <Text style={styles.baseText}> Last completed by NAME </Text>
+                </View>
+              </TouchableNativeFeedback>
+            </View>
+          }
+        />
+      <Text>Upcoming</Text>
+        <ListView
+          dataSource={this.ds.cloneWithRows(this.state.upcomingTasks)}
           enableEmptySections={true}
           renderRow={(rowData) =>
             <View>
