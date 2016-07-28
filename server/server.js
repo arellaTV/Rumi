@@ -3,7 +3,7 @@ let session = require('express-session');
 let bodyParser = require('body-parser');
 
 
-let addSockets = require('./alphadeltaninerniner.service');
+let addSockets = require('./socket');
 let auth = require('./auth');
 
 checkForEnvironmentVariables(['FB_ID', 'FB_SECRET', 'SESSION_SECRET']);
