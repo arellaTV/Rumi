@@ -1,9 +1,9 @@
 import React from 'react';
 import { DrawerLayoutAndroid, Text } from 'react-native';
-import AddTask from '../AddTask/AddTask.js';
+import AddTask from '../AddTask/AddTaskView';
 import TappableRow from '../stateless/TappableRow';
 import MenuBar from '../stateless/MenuBar';
-import TaskList from '../TaskList/TaskListView';
+import TaskList from '../taskListView/taskListView';
 
 export default class TaskScene extends React.Component {
   render() {
