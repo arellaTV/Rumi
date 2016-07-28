@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import TaskScene from './resources/TaskScene/TaskScene';
 import {
   BackAndroid,
   NavigationExperimental as Navigator,
   Text
 } from 'react-native';
+import TaskScene from './resources/TaskScene/TaskScene';
+import AuthScene from './resources/AuthScene/AuthScene';
 
 var {
   CardStack,
@@ -42,8 +43,8 @@ class Router extends Component {
   _renderScene(sceneProps) {
     if (this.props.loggedIn) {
       return (
-        <Text>{'You aren\'t logged in, yo!'}</Text>
-      )
+        <AuthScene />
+      );
     } else {
       return (
         <TaskScene

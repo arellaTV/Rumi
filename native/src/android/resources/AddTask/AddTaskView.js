@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { 
-  StyleSheet, 
-  View, 
-  Text, 
-  Modal, 
-  TextInput, 
-  Picker, 
-  TouchableNativeFeedback, 
+import {
+  StyleSheet,
+  View,
+  Text,
+  Modal,
+  TextInput,
+  Picker,
+  TouchableNativeFeedback,
   TouchableHighlight,
   Image } from 'react-native';
 
@@ -50,8 +50,8 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   newTask: {
-    margin: 10, 
-    fontSize: 24, 
+    margin: 10,
+    fontSize: 24,
     color: '#EAEAEA',
     textAlign: 'center',
     fontFamily: 'Roboto'
@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
     height: 40,
     marginLeft: 20
   }
-  
+
 });
 
 class AddTask extends Component {
@@ -90,7 +90,7 @@ class AddTask extends Component {
       details: '',
       taskInterval: 0,
       modalVisible: false
-    }
+    };
   }
 
   calcDueDateAndInterval() {
@@ -110,7 +110,7 @@ class AddTask extends Component {
   }
 
   setModalVisible(visible) {
-    this.setState({modalVisible: visible}); 
+    this.setState({modalVisible: visible});
   }
 
   onSubmit() {
@@ -134,7 +134,7 @@ class AddTask extends Component {
             <Icon name="plus" size={40} color="#EAEAEA" />
           </View>
         </TouchableHighlight>
-      
+
         <View>
           <Modal
             animationType={"slide"}
@@ -150,14 +150,14 @@ class AddTask extends Component {
               </TouchableHighlight>
               <Text style={styles.newTask}>New Task</Text>
               <TouchableNativeFeedback onPress={this.onSubmit.bind(this)}>
-                <View> 
+                <View>
                   <Text style={styles.submitTask}>Save</Text>
                 </View>
               </TouchableNativeFeedback>
 
               </View>
             <View  style={styles.modal}>
-              
+
 
               <Text style={styles.title}>Name:</Text>
                 <TextInput
@@ -186,8 +186,8 @@ class AddTask extends Component {
                 onChangeText={(text) => this.setState({details: text})}
                 multiline={true}/>
 
-              
-              
+
+
             </View>
           </Modal>
         </View>
