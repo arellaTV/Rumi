@@ -2,7 +2,7 @@ let express = require('express');
 let session = require('express-session');
 let bodyParser = require('body-parser');
 
-let decorate = require('./alphadeltaninerniner.service');
+let decorate = require('./socket');
 let auth = require('./auth');
 
 checkForEnvironmentVariables(['FB_ID', 'FB_SECRET', 'SESSION_SECRET']);

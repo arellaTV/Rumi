@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Text, TextInput, Picker, TouchableNativeFeedback, Image } from 'react-native';
 
+import socket from '../../socketClient';
+
 class AddTask extends Component {
   constructor(props) {
     super(props);
@@ -33,6 +35,12 @@ class AddTask extends Component {
   onSubmit() {
     this.calcDueDateAndInterval();
     // insert socket emit logic here
+
+    socket.emit('create task', {
+      name: this.state.name,
+      dueBy: this.state.duedate,
+      interval: this.state.taskInterval
+    });
   }
 
   render() {
