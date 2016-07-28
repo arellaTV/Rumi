@@ -57,8 +57,6 @@ class Router extends Component {
   }
 }
 
-import AddTask from './resources/AddTask.js';
-
 class App extends Component {
   constructor(props, context) {
     super(props, context);
