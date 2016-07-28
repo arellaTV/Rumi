@@ -4,6 +4,7 @@ import {
   StyleSheet,
   Text,
   TouchableNativeFeedback,
+  TouchableHighlight,
   View
 } from 'react-native';
 import socket from '../../socketClient';
@@ -56,21 +57,31 @@ class TaskListView extends Component {
     });
   }
 
+  onDismissal(e) {
+    console.log('dismissed!', e);
+    
+  }
+
   render() {
     return (
       <View style={styles.taskList}>
         <ListView
           dataSource={this.state.dataSource}
           renderRow={(rowData) =>
-            <TouchableNativeFeedback
-              onPress={this._onPressButton}
-              background={TouchableNativeFeedback.SelectableBackground()}>
-              <View style={styles.taskCard}>
-                <Text style={styles.titleText}> {rowData.name} </Text>
-                <Text style={styles.baseText}> Due: {rowData.dueBy} </Text>
-                <Text style={styles.baseText}> Last completed by NAME </Text>
-              </View>
-            </TouchableNativeFeedback>
+            <View>
+              <TouchableNativeFeedback
+                onPress={this._onPressButton}
+                background={TouchableNativeFeedback.SelectableBackground()}>
+                <View style={styles.taskCard}>
+                  <Text style={styles.titleText}> {rowData.name} </Text>
+                  <Text style={styles.baseText}> Due: {rowData.dueBy} </Text>
+                  <Text style={styles.baseText}> Last completed by NAME </Text>
+                </View>
+              </TouchableNativeFeedback>
+              <TouchableHighlight onPress={this.onDismissal.bind(this, rowData.id)}>
+                <Text>dismiss</Text>
+              </TouchableHighlight>
+            </View>
           }
         />
       </View>
