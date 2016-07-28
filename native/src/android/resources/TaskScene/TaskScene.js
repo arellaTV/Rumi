@@ -19,8 +19,9 @@ export default class TaskScene extends React.Component {
         <TappableRow text="Task 2" onPress={this.props.onPushRoute}/>
         <TaskList />
         {/* Temp placed here*/}
-        <AddTask />
       </DrawerLayoutAndroid>
     )
   }
 }
+
+// <AddTask />

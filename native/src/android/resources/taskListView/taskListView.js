@@ -39,7 +39,8 @@ class TaskListView extends Component {
       dataSource: ds.cloneWithRows([
         {"id": 1, "name": "Do Dishes", "due": "Tomorrow"},
         {"id": 2, "name": "Wash Laundry", "due": "Friday"}
-      ])
+      ]),
+      completedTasks: []
     };
   }
 
@@ -58,13 +59,27 @@ class TaskListView extends Component {
   }
 
   onDismissal(e) {
-    console.log('dismissed!', e);
-    
+    var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+    socket.emit('get all tasks');
+    socket.on('sending all tasks', (data) => {
+      for (var i = 0; i < data.length; i++) {
+        if (data[i].id === e.id) {
+          data.splice(i, 1);
+        }
+      }
+      this.state.completedTasks.unshift(e);
+      this.setState({
+        dataSource: ds.cloneWithRows(data),
+        completedTasks: this.state.completedTasks
+      });
+    });
   }
 
   render() {
+    var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     return (
       <View style={styles.taskList}>
+
         <ListView
           dataSource={this.state.dataSource}
           renderRow={(rowData) =>
@@ -78,9 +93,25 @@ class TaskListView extends Component {
                   <Text style={styles.baseText}> Last completed by NAME </Text>
                 </View>
               </TouchableNativeFeedback>
-              <TouchableHighlight onPress={this.onDismissal.bind(this, rowData.id)}>
+              <TouchableHighlight onPress={this.onDismissal.bind(this, rowData)}>
                 <Text>dismiss</Text>
               </TouchableHighlight>
+            </View>
+          }
+        />
+        <ListView
+          dataSource={ds.cloneWithRows(this.state.completedTasks)}
+          renderRow={(rowData) =>
+            <View>
+              <TouchableNativeFeedback
+                onPress={this._onPressButton}
+                background={TouchableNativeFeedback.SelectableBackground()}>
+                <View style={styles.taskCard}>
+                  <Text style={styles.titleText}> {rowData.name} </Text>
+                  <Text style={styles.baseText}> Due: {rowData.dueBy} </Text>
+                  <Text style={styles.baseText}> Last completed by NAME </Text>
+                </View>
+              </TouchableNativeFeedback>
             </View>
           }
         />
@@ -90,3 +121,21 @@ class TaskListView extends Component {
 }
 
 export default TaskListView;
+
+// <ListView
+//   dataSource={this.state.completedTasks}
+//   renderRow={(rowData) =>
+//     <View>
+//       <TouchableNativeFeedback
+//         onPress={this._onPressButton}
+//         background={TouchableNativeFeedback.SelectableBackground()}>
+//         <View style={styles.taskCard}>
+//           <Text style={styles.titleText}> {rowData.name} </Text>
+//           <Text style={styles.baseText}> Due: {rowData.dueBy} </Text>
+//           <Text style={styles.baseText}> Last completed by NAME </Text>
+//         </View>
+//       </TouchableNativeFeedback>
+//     </View>
+//   }
+//   />
+// </View>
