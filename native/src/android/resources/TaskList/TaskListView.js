@@ -8,7 +8,7 @@ import {
   View
 } from 'react-native';
 import socket from '../../socketClient';
-import TaskCategory from './TaskItem'
+import Task from './TaskItem'
 
 const styles = StyleSheet.create({
   taskList: {
@@ -100,34 +100,26 @@ class TaskListView extends Component {
   }
 
   render() {
-    var overdueTasks;
-    if (this.state.overdueTasks.length) {
-      overdueTasks =
-        <TaskCategory category={this.state.overdueTasks}/>
-    }
+    var tasks = [this.state.overdueTasks, this.state.urgentTasks, this.state.overdueTasks];
+    console.log(tasks);
     return (
       <View style={styles.taskList}>
         <ListView
-          dataSource={this.state.dataSource}
+          dataSource={this.ds.cloneWithRows(tasks)}
           enableEmptySections={true}
-          renderRow={(rowData) =>
-            <View>
-              <TouchableNativeFeedback
-                onPress={this._onPressButton}
-                background={TouchableNativeFeedback.SelectableBackground()}>
-                <View style={styles.taskCard}>
-                  <Text style={styles.titleText}> {rowData.name} </Text>
-                  <Text style={styles.baseText}> Due: {rowData.dueBy} </Text>
-                  <Text style={styles.baseText}> Last completed by NAME </Text>
+          renderRow={
+            (category) => {
+              return (
+                <View>
+                  <Text>'test'</Text>
+                  {category.map((task) =>
+                    <Task task={task}/>
+                  )}
                 </View>
-              </TouchableNativeFeedback>
-              <TouchableHighlight onPress={this.onDismissal.bind(this, rowData)}>
-                <Text>dismiss</Text>
-              </TouchableHighlight>
-            </View>
+              );
+            }
           }
         />
-        {overdueTasks}
       </View>
     );
   }

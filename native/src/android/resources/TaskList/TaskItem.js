@@ -32,24 +32,21 @@ const styles = StyleSheet.create({
 
 const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 
-const TaskCategory = (props) => (
-  <ListView
-    dataSource={ds.cloneWithRows(props.category)}
-    enableEmptySections={true}
-    renderRow={(rowData) =>
-      <View>
-        <TouchableNativeFeedback
-        onPress={this._onPressButton}
-        background={TouchableNativeFeedback.SelectableBackground()}>
-        <View style={styles.taskCard}>
-          <Text style={styles.titleText}> {rowData.name} </Text>
-          <Text style={styles.baseText}> Due: {rowData.dueBy} </Text>
-          <Text style={styles.baseText}> Last completed by NAME </Text>
-        </View>
-        </TouchableNativeFeedback>
+const Task = (props) => (
+  <View>
+    <TouchableNativeFeedback
+      onPress={props._onPressButton}
+      background={TouchableNativeFeedback.SelectableBackground()}>
+      <View style={styles.taskCard}>
+        <Text style={styles.titleText}> {props.task.name} </Text>
+        <Text style={styles.baseText}> Due: {props.task.dueBy} </Text>
+        <Text style={styles.baseText}> Last completed by NAME </Text>
       </View>
-    }
-  />
+    </TouchableNativeFeedback>
+    <TouchableHighlight onPress={props.onDismissal}>
+      <Text>dismiss</Text>
+    </TouchableHighlight>
+  </View>
 )
 
-export default TaskCategory;
+export default Task;
