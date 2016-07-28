@@ -60,16 +60,12 @@ class AddTask extends Component {
   render() {
     return (
       <View>
-        <View>
-          <Text>Hello World!</Text>
+        <TouchableHighlight onPress={() => {
+          this.setModalVisible(true)
+        }}>
+          <Text>Show Modal</Text>
+        </TouchableHighlight>
 
-          <TouchableHighlight onPress={() => {
-            this.setModalVisible(!this.state.modalVisible);
-          }}>
-            <Text>Hide Modal</Text>
-          </TouchableHighlight>
-
-        </View>
         <View style={styles.modal}>
           <Modal
             animationType={"slide"}
@@ -110,7 +106,11 @@ class AddTask extends Component {
             <TouchableNativeFeedback onPress={this.onSubmit.bind(this)}>
               <View style={{width: 50, height: 25, backgroundColor: 'grey'}}></View>
             </TouchableNativeFeedback>
-
+            <TouchableHighlight onPress={() => {
+              this.setModalVisible(!this.state.modalVisible)
+            }}>
+              <Text>Hide Modal</Text>
+            </TouchableHighlight>
           </Modal>
         </View>
       </View>
