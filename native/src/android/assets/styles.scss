@@ -1,0 +1,80 @@
+$primaryColor: #EAEAEA; // light gray
+$secondaryColor: #303030; // dark gray
+$accentColor: #28BF32; // green
+
+@mixin center-children {
+  display: flex;
+  align-items: center;
+}
+
+footer {
+  @include center-children;
+  background: $secondaryColor;
+  flex: 0.2;
+}
+
+showModal {
+  width: 65;
+  height: 100;
+  background: $accentColor;
+  align-items: 'center';
+  padding-top: 10;
+}
+
+modal {
+  background: $secondaryColor;
+  align-items: 'stretch';
+  justify-content: : 'flex-start';
+  padding-bottom: 250;
+  flex: 1;
+}
+
+header {
+  @include center-children;
+  background: $secondaryColor;
+  flex-direction: 'row';
+  justify-content: : 'space-around';
+}
+
+hideModal {
+  background: $secondaryColor;
+  color: $accentColor;
+  font-size: 20;
+  }
+
+submitTask {
+  background: $secondaryColor;
+  color: $accentColor;
+  font-size: 20;
+  }
+
+newTask {
+  margin: 10, 
+  font-size: 24, 
+  color: $primaryColor;
+  text-align: 'center';
+}
+
+title {
+  font-size: 20;
+  color: $primaryColor;
+  margin: 20
+}
+
+input {
+  width: 370;
+  height: 40;
+  background: $primaryColor;
+  margin-left: 20
+}
+
+recurrance {
+  @include center-children;
+  flex-direction: 'row';
+  justify-content: : 'space-around';
+  background: $primaryColor;
+  width: 370;
+  height: 40;
+  margin-left: 20;
+}
+  

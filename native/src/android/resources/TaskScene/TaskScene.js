@@ -32,6 +32,16 @@ export default class TaskScene extends React.Component {
         drawerPosition={DrawerLayoutAndroid.positions.Right}
         renderNavigationView={() => <MenuBar onPushRoute={this.props.onPushRoute} />}>
         {view}
+        renderNavigationView={() => <MenuBar />}>
+        <TaskList />
+        <Text>
+          Route: {this.props.route.key}
+        </Text>
+        <TappableRow text="Task 1" onPress={this.props.onPushRoute}/>
+        <TappableRow text="Task 2" onPress={this.props.onPushRoute}/>
+        <TaskList />
+        <AddTask />
+        {/* Temp placed here*/}
       </DrawerLayoutAndroid>
     );
   }

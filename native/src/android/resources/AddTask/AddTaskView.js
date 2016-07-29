@@ -11,73 +11,8 @@ import {
   Image } from 'react-native';
 
 import socket from '../../socketClient';
+import styles from '../../assets/styles.js';
 import Icon from 'react-native-vector-icons/FontAwesome';
-
-const styles = StyleSheet.create({
-  footer: {
-    backgroundColor: '#303030',
-    flex: 0.2,
-    alignItems: 'center'
-  },
-  showModal: {
-    width: 65,
-    height: 100,
-    backgroundColor: '#28BF32',
-    alignItems: 'center',
-    paddingTop: 10
-  },
-  modal: {
-    backgroundColor: '#303030',
-    alignItems: 'stretch',
-    justifyContent: 'flex-start',
-    paddingBottom: 250,
-    flex: 1
-  },
-  header: {
-    backgroundColor: '#303030',
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-  },
-  hideModal: {
-    backgroundColor: '#303030',
-    color: '#28BF32',
-    fontSize: 20,
-  },
-  submitTask: {
-    backgroundColor: '#303030',
-    color: '#28BF32',
-    fontSize: 20,
-  },
-  newTask: {
-    margin: 10,
-    fontSize: 24,
-    color: '#EAEAEA',
-    textAlign: 'center',
-    fontFamily: 'Roboto'
-  },
-  title: {
-    fontSize: 20,
-    color: '#EAEAEA',
-    margin: 20
-  },
-  input: {
-    width: 370,
-    height: 40,
-    backgroundColor: '#EAEAEA',
-    marginLeft: 20
-  },
-  recurrance: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    backgroundColor: '#EAEAEA',
-    width: 370,
-    height: 40,
-    marginLeft: 20
-  }
-
-});
 
 class AddTask extends Component {
   constructor(props) {
