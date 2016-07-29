@@ -12,6 +12,73 @@ import {
 
 import socket from '../../socketClient';
 
+const styles = StyleSheet.create({
+  footer: {
+    backgroundColor: '#252A34',
+    flex: 0.2,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  showModal: {
+    textAlign: 'center', 
+    color: '#08D9D6'
+  },
+  modal: {
+    backgroundColor: '#252A34',
+    alignItems: 'stretch',
+    justifyContent: 'center',
+    paddingBottom: 250,
+    flex: 1
+  },
+  header: {
+    backgroundColor: '#252A34',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  hideModal: {
+    backgroundColor: '#252A34',
+    color: '#08D9D6',
+    fontSize: 20
+  },
+  submitButton: {
+    width: 100,
+    height: 40, 
+    backgroundColor: '#08D9D6',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  submitText: {
+    color: '#252A34',
+    fontSize: 18,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  newTask: {
+    margin: 10, 
+    fontSize: 24, 
+    color: '#EAEAEA',
+    textAlign: 'center'
+  },
+  title: {
+    fontSize: 20,
+    color: '#EAEAEA',
+    margin: 20
+  },
+  input: {
+    width: 500,
+    height: 40,
+    backgroundColor: '#EAEAEA'
+  },
+  recurrance: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#EAEAEA',
+    height: 40
+  }
+  
+});
+
 class AddTask extends Component {
   constructor(props) {
     super(props);
@@ -59,58 +126,67 @@ class AddTask extends Component {
 
   render() {
     return (
-      <View>
-        <TouchableHighlight onPress={() => {
+      <View style={styles.footer}>
+        <TouchableHighlight  onPress={() => {
           this.setModalVisible(true)
         }}>
-          <Text>Show Modal</Text>
+          <Text style={styles.showModal}>Show Modal</Text>
         </TouchableHighlight>
-
-        <View style={styles.modal}>
+      
+        <View>
           <Modal
             animationType={"slide"}
             transparent={false}
             visible={this.state.modalVisible}
             onRequestClose={() => {alert("Modal has been closed.")}}
             >
-            
-            <Text style={styles.newTask}>New Task</Text>
+            <View style={styles.header}>
+              <TouchableHighlight onPress={() => {
+                this.setModalVisible(!this.state.modalVisible)
+              }}>
+                <Text style={styles.hideModal}> Back</Text>
+              </TouchableHighlight>
+              <Text style={styles.newTask}>New Task</Text>
+              <TouchableNativeFeedback onPress={this.onSubmit.bind(this)}>
+                <View style={styles.submitButton}> 
+                  <Text style={styles.submitText}>Submit</Text>
+                </View>
+              </TouchableNativeFeedback>
 
-            <Text>Name:</Text>
+              </View>
+            <View  style={styles.modal}>
+              
+
+              <Text style={styles.title}>Name:</Text>
+                <TextInput
+                  style={styles.input}
+                  onChangeText={(text) => this.setState({name: text})}/>
+
+              <Text style={styles.title}>Recurrance:</Text>
+                <View style={styles.recurrance}>
+                  <TextInput
+                    style={{width: 100}}
+                    keyboardType = 'numeric'
+                    onChangeText={(num) => this.setState({interval: num})}/>
+                  <Picker
+                    style={{width: 100}}
+                    selectedValue={this.state.recurranceVal}
+                    onValueChange={(val) => this.setState({recurranceVal: val})}>
+                    <Picker.Item label='hour(s)' value={0} />
+                    <Picker.Item label='day(s)' value={1} />
+                  </Picker>
+                </View>
+
+              <Text style={styles.title}>Details:</Text>
+
               <TextInput
                 style={styles.input}
-                onChangeText={(text) => this.setState({name: text})}/>
+                onChangeText={(text) => this.setState({details: text})}
+                multiline={true}/>
 
-            <Text>Recurrance:</Text>
-              <View style={styles.recurrance}>
-                <TextInput
-                  style={{width: 50}}
-                  keyboardType = 'numeric'
-                  onChangeText={(num) => this.setState({interval: num})}/>
-                <Picker
-                  style={{width: 100}}
-                  selectedValue={this.state.recurranceVal}
-                  onValueChange={(val) => this.setState({recurranceVal: val})}>
-                  <Picker.Item label='hour(s)' value={0} />
-                  <Picker.Item label='day(s)' value={1} />
-                </Picker>
-              </View>
-
-            <Text>Details:</Text>
-
-            <TextInput
-              style={styles.input}
-              onChangeText={(text) => this.setState({details: text})}
-              multiline={true}/>
-
-            <TouchableNativeFeedback onPress={this.onSubmit.bind(this)}>
-              <View style={{width: 50, height: 25, backgroundColor: 'grey'}}></View>
-            </TouchableNativeFeedback>
-            <TouchableHighlight onPress={() => {
-              this.setModalVisible(!this.state.modalVisible)
-            }}>
-              <Text>Hide Modal</Text>
-            </TouchableHighlight>
+              
+              
+            </View>
           </Modal>
         </View>
       </View>
@@ -118,23 +194,6 @@ class AddTask extends Component {
   }
 }
 
-const styles = StyleSheet.create({
-  modal: {
-    alignItems: 'center', 
-    backgroundColor: 'lightgrey'
-  },
-  newTask: {
-    margin: 10, 
-    fontSize: 24, 
-    textAlign: 'right'
-  },
-  input: {
-    width: 300
-  },
-  recurrance: {
-    flex: 1,
-    flexDirection: 'row'
-  }
-});
+
 
 export default AddTask;
