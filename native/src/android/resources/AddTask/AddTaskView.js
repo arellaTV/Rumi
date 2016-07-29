@@ -56,6 +56,7 @@ class AddTask extends Component {
       interval: this.state.taskInterval
     });
     socket.emit('get all tasks');
+    console.log('getting to line 126 in AddTaskView');
   }
 
   render() {
