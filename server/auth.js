@@ -1,127 +1,153 @@
 let express = require('express');
-let passport = require('passport');
-let LocalStrategy = require('passport-local').Strategy;
-let FacebookStrategy = require('passport-facebook').Strategy;
 
 let User = require('./models/User');
 let OAuth = require('./models/OAuth');
 
-passport.serializeUser((user, done) => {
-  done(null, user.id);
-});
-passport.deserializeUser((id, done) => {
-  User.findById(id).then(user => {
-    done(null, user);
-  });
-});
+var nJwt = require('njwt');
+var secureRandom = require('secure-random');
 
-passport.use(new LocalStrategy({
-  usernameField: 'email'
-}, function(email, password, done) {
-  User.findByEmail(email).then(user => {
-    if (!user) {
-      console.error('user does not exist in the database');
-      done(null, false);
-    } else {
-      user.verifyPassword(password).then(verified => {
-        if (verified) {
-          done(null, user);
-        } else {
-          done(null, false);
-        }
-      });
-    }
-  });
-}));
+// signing key is only stored in memory
+// if the server restarts, all users must sign back in.
+// This can be resolved by sharing the signingKey between a cluster
+// of servers securely. (Imagine a redux store for server clusters)
+var signingKey = secureRandom(256, {type: 'Buffer'});
 
-passport.use(new FacebookStrategy({
-  clientID: process.env.FB_ID,
-  clientSecret: process.env.FB_SECRET,
-  callbackURL: '/auth/facebook/return'
-}, function(accessToken, refreshToken, profile, done) {
-    // what if user exists in user table
-    // but first time logging in with fb?
-    // current logic would create a duplicate user in user table
-    OAuth.findOne({where: {
-      oauthId: profile.id,
-      oauthType: 'facebook'
-    }})
-    .then(oauth => {
-      if (!oauth) {
-        User.create({
-          name: profile.displayName,
-          email: 'na',   // ???
-          password: 'na' // ???
-        })
-        .then((user) => {
-          OAuth.create({
-            oauthId: profile.id,
-            oauthType: profile.provider,
-            userId: user.id
-          });
-          done(null, user);
-        });
+var createToken = function(email) {
+  var claims = {
+    iss: '138.68.14.133:3000',
+    sub: email
+  };
+  var jwt = nJwt.create(claims, signingKey);
+  return jwt.compact();
+};
+
+var verifyToken = function(token) {
+  return new Promise((resolve, reject) => {
+    nJwt.verify(token, signingKey, (err, verifiedJwt) => {
+      err ? reject(err) : resolve(verifiedJwt);
+    });
+  });
+};
+
+var login = function(email, password) {
+  return new Promise(function(resolve, reject) {
+    User.findByEmail(email).then(user => {
+      if (!user) {
+        console.error('user does not exist in the database');
+        reject('user does not exist');
       } else {
-        User.findOne({where: {
-          id: oauth.userId
-        }})
-        .then(user => {
-          done(null, user);
+        user.verifyPassword(password).then(verified => {
+          if (verified) {
+            var token = createToken(email);
+            resolve(token);
+          } else {
+            reject('incorrect password');
+          }
         });
       }
     });
-}));
+  });
+};
+
+var register = function(info) {
+  return new Promise(function(resolve, reject) {
+    User.findByEmail(info.email).then(user => {
+      if (user) {
+        reject(user);
+      } else {
+        User.create({
+          name: info.name,
+          email: info.email,
+          password: info.password
+        }).then(user => {
+          resolve(createToken(info.email));
+        });
+      }
+    });
+  });
+}
+
+// passport.use(new FacebookStrategy({
+//   clientID: process.env.FB_ID,
+//   clientSecret: process.env.FB_SECRET,
+//   callbackURL: '/auth/facebook/return'
+// }, function(accessToken, refreshToken, profile, done) {
+//     // what if user exists in user table
+//     // but first time logging in with fb?
+//     // current logic would create a duplicate user in user table
+//     OAuth.findOne({where: {
+//       oauthId: profile.id,
+//       oauthType: 'facebook'
+//     }})
+//     .then(oauth => {
+//       if (!oauth) {
+//         User.create({
+//           name: profile.displayName,
+//           email: 'na',   // ???
+//           password: 'na' // ???
+//         })
+//         .then((user) => {
+//           OAuth.create({
+//             oauthId: profile.id,
+//             oauthType: profile.provider,
+//             userId: user.id
+//           });
+//           done(null, user);
+//         });
+//       } else {
+//         User.findOne({where: {
+//           id: oauth.userId
+//         }})
+//         .then(user => {
+//           done(null, user);
+//         });
+//       }
+//     });
+// }));
 
 let routes = express.Router();
 
-routes.post('/auth/local',
-  passport.authenticate('local', {
-    successRedirect: '/',
-    failureRedirect: '/login.html'
-  })
-);
-
-routes.post('/auth/local/register', (req, res) => {
-  User.findByEmail(req.body.email).then(user => {
-    if (user) {
-      res.redirect('/register.html?error');
-    } else {
-      User.create({
-        name: req.body.name,
-        email: req.body.email,
-        password: req.body.password
-      }).then(user => {
-        res.redirect('/login.html?success');
-      });
-    }
+routes.post('/auth/local', (req, res) => {
+  login(req.body.email, req.body.password).then((token) => {
+    res.send(JSON.stringify(token));
+  }).catch((err) => {
+    res.send(err);
   });
 });
 
-routes.get('/auth/facebook', passport.authenticate('facebook'));
+routes.post('/auth/local/register', (req, res) => {
+  register(req.body).then(token => {
+    res.send(JSON.stringify(token));
+  }).catch(err => {
+    res.send(err);
+  });
+});
 
-routes.get('/auth/facebook/return',
-  passport.authenticate('facebook', {
-      successRedirect: '/',
-      failureRedirect: '/login.html'
-  })
-);
+routes.get('/auth/facebook', (req, res) => {
+  // add in the token verificaiton for android
+});
+
+routes.get('/auth/facebook/return', () => {
+  // add in token verification?
+});
 
 routes.get('/logout', (req, res) => {
-  req.session.destroy(() => {
-    res.redirect('/login.html');
-  });
+  // why bother
 });
 
 function isAuth(req, res, next) {
-  if (req.isAuthenticated && req.isAuthenticated()) {
-    return next();
-  } else {
-    res.redirect('/login.html');
+  if (req.headers.authorization) {
+    // gets the token from the Bearer <token> format
+    var token = req.headers.authorization.split(' ')[1];
   }
+  verifyToken(token).then(token => {
+    next();
+  }).catch(err => {
+    res.send('reauthorize');
+  });
 }
 
 module.exports = {
-  passport,
   routes,
   isAuth
 };

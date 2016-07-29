@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-import TaskScene from './resources/TaskScene/TaskScene';
 import {
   BackAndroid,
   NavigationExperimental as Navigator,
   Text
 } from 'react-native';
+import TaskScene from './resources/TaskScene/TaskScene';
+import LoginView from './resources/AuthScene/LoginView';
+import RegisterView from './resources/AuthScene/RegisterView';
 
 var {
   CardStack,
@@ -25,12 +27,12 @@ class Router extends Component {
 
     this._onPushRoute = this.props.onNavigationChange.bind(null, 'push');
     this._onPopRoute = this.props.onNavigationChange.bind(null, 'pop');
+    this._onSceneChange = this.props.onNavigationChange.bind(null, 'sceneChange');
     // bind your functions in the constructor
     // this makes it so you don't have to worry about it elsewhere
     this._renderScene = this._renderScene.bind(this);
   }
   render() {
-    // creates a navigator that pops on backbutton
     return (
       <CardStack
         onNavigateBack={this._onPopRoute}
@@ -40,11 +42,20 @@ class Router extends Component {
       );
   }
   _renderScene(sceneProps) {
-    if (this.props.loggedIn) {
-      return (
-        <Text>{'You aren\'t logged in, yo!'}</Text>
-      )
+    var targetView = sceneProps.scene.route.targetView;
+    if (!this.props.loggedIn) {
+      // Switch statement for different scenes
+      if (targetView === 'RegisterView') {
+        return (
+          <RegisterView loginSuccess={this.props.onLoginSuccess} onPushRoute={this._onPushRoute} onPopRoute={this._onPopRoute} onSceneChange={this._onSceneChange} />
+        );
+      } else {
+        return (
+          <LoginView loginSuccess={this.props.onLoginSuccess} onPushRoute={this._onPushRoute} onPopRoute={this._onPopRoute} onSceneChange={this._onSceneChange} />
+        )
+      }
     } else {
+      // Could have a switch statement here for different scenes
       return (
         <TaskScene
           route={sceneProps.scene.route}
@@ -63,21 +74,31 @@ class App extends Component {
     this.state = {
       navigationState: {
         index: 0,
-        routes: [{key: 'Task List'}]
-      }
+        routes: [{key: 'Init', targetView: 'LoginView'}]
+      },
+      loggedIn: false
     };
     this._onNavigationChange = this._onNavigationChange.bind(this);
+    this.onLoginSuccess = this.onLoginSuccess.bind(this);
   }
 
-  _onNavigationChange(type) {
+  onLoginSuccess() {
+    this.setState(Object.assign({}, this.state, {loggedIn: true}));
+  }
+
+  _onNavigationChange(type, route) {
     let {navigationState} = this.state;
+    var route = route || {};
+    route.key = 'Route at: ' + Date.now();
     switch(type) {
       case 'push':
-        const route = {key: 'Route-' + Date.now()};
         navigationState = StateUtils.push(navigationState, route);
         break;
       case 'pop':
         navigationState = StateUtils.pop(navigationState);
+        break;
+      case 'sceneChange':
+        navigationState = {index: 0, routes: [route]};
         break;
     }
     if (this.state.navigationState !== navigationState) {
@@ -89,6 +110,8 @@ class App extends Component {
     return (
       <Router
         onNavigationChange={this._onNavigationChange}
+        onLoginSuccess={this.onLoginSuccess}
+        loggedIn={this.state.loggedIn}
         navigationState={this.state.navigationState}
       />
     );

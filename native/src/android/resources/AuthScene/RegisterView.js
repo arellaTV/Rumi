@@ -1,19 +1,13 @@
 import React from 'react';
 import {
-  AsyncStorage,
   Text,
   TextInput,
   TouchableNativeFeedback,
   View
 } from 'react-native';
+import { register } from './Auth';
 
-import { login, getToken } from './Auth';
-
-const {
-  LoginButton
-} = 'react-native-fbsdk';
-
-export default class LoginView extends React.Component {
+export default class RegisterView extends React.Component {
   constructor(props, context) {
     super(props, context);
     this.inputs = {};
@@ -22,7 +16,7 @@ export default class LoginView extends React.Component {
     this.inputs[key] = val;
   }
   onSubmit() {
-    login(this.inputs).then(res => {
+    register(this.inputs).then(res => {
       if (res === true) {
         this.props.loginSuccess();
         this.props.onSceneChange({targetView: 'TaskView'});
@@ -31,12 +25,12 @@ export default class LoginView extends React.Component {
       }
     });
   }
-  onRegisterClick() {
-    this.props.onPushRoute({targetView: 'RegisterView'});
-  }
   render() {
     return (
       <View>
+        <Text>Name:</Text>
+        <TextInput
+          onChangeText={this.onChange.bind(this, 'name')} />
         <Text>Email:</Text>
         <TextInput
           onChangeText={this.onChange.bind(this, 'email')} />
@@ -45,12 +39,12 @@ export default class LoginView extends React.Component {
           onChangeText={this.onChange.bind(this, 'password')} />
         <TouchableNativeFeedback onPress={this.onSubmit.bind(this)}>
           <View style={{width: 50, height: 25, backgroundColor: 'grey'}}>
-            <Text>Login</Text>
+            <Text>Register</Text>
           </View>
         </TouchableNativeFeedback>
-        <TouchableNativeFeedback onPress={this.onRegisterClick.bind(this)}>
+        <TouchableNativeFeedback>
           <View style={{width: 50, height: 25, backgroundColor: 'grey'}}>
-            <Text>Register</Text>
+            <Text>Login with existing account</Text>
           </View>
         </TouchableNativeFeedback>
       </View>
