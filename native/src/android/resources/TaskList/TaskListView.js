@@ -84,6 +84,7 @@ class TaskListView extends Component {
   }
 
   onDismissal(e) {
+    console.log('in dismissal, id is', e);
     socket.emit('get all tasks');
     socket.on('sending all tasks', (data) => {
       for (var i = 0; i < data.length; i++) {
@@ -115,8 +116,8 @@ class TaskListView extends Component {
               return (
                 <View>
                   {categoryName}
-                  {category.map((task) =>
-                    <Task task={task}/>
+                  {category.map((task, index) =>
+                    <Task task={task} onDismissal={this.onDismissal.bind(this, index)}/>
                   )}
                 </View>
               );
