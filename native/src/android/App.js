@@ -5,8 +5,7 @@ import {
   Text
 } from 'react-native';
 import TaskScene from './resources/TaskScene/TaskScene';
-import LoginView from './resources/AuthScene/LoginView';
-import RegisterView from './resources/AuthScene/RegisterView';
+import AuthScene from './resources/AuthScene/AuthScene';
 
 var {
   CardStack,
@@ -44,20 +43,18 @@ class Router extends Component {
   _renderScene(sceneProps) {
     var targetView = sceneProps.scene.route.targetView;
     if (!this.props.loggedIn) {
-      // Switch statement for different scenes
-      if (targetView === 'RegisterView') {
-        return (
-          <RegisterView loginSuccess={this.props.onLoginSuccess} onPushRoute={this._onPushRoute} onPopRoute={this._onPopRoute} onSceneChange={this._onSceneChange} />
-        );
-      } else {
-        return (
-          <LoginView loginSuccess={this.props.onLoginSuccess} onPushRoute={this._onPushRoute} onPopRoute={this._onPopRoute} onSceneChange={this._onSceneChange} />
-        )
-      }
+      return (
+        <AuthScene
+          targetView={targetView}
+          loginSuccess={this.props.onLoginSuccess}
+          onPushRoute={this._onPushRoute}
+          onPopRoute={this._onPopRoute}
+          onSceneChange={this._onSceneChange} />
+      );
     } else {
-      // Could have a switch statement here for different scenes
       return (
         <TaskScene
+          targetView={targetView}
           route={sceneProps.scene.route}
           onPushRoute={this._onPushRoute}
           onPopRoute={this._onPopRoute}
