@@ -35,13 +35,6 @@ class CompleteTask extends Component {
     super(props);
     this.ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
-      dataSource: this.ds.cloneWithRows([
-        {"id": 1, "name": "Do Dishes", "due": "Tomorrow"},
-        {"id": 2, "name": "Wash Laundry", "due": "Friday"}
-      ]),
-      overdueTasks: [],
-      urgentTasks: [],
-      upcomingTasks: [],
       completedTasks: []
     };
   }
@@ -51,34 +44,11 @@ class CompleteTask extends Component {
   }
 
   componentDidMount() {
-    socket.on('sending all tasks', (data) => {
-      var sortedTasks = this.prioritizeTasks(data);
+    socket.on('complete task', (data) => {
       this.setState({
-        dataSource: this.ds.cloneWithRows(data),
-        overdueTasks: sortedTasks.overdue,
-        urgentTasks: sortedTasks.urgent,
-        upcomingTasks: sortedTasks.upcoming
+        completedTasks: data
       });
     });
-  }
-
-  prioritizeTasks(allTasks) {
-    let tasks = { upcoming: [], urgent: [], overdue: [] };
-    let now = Date.now();
-
-    allTasks.forEach(t => {
-      let timeLeft = Date.parse(t.dueBy) - now;
-
-      if (timeLeft < 0) {
-        return tasks.overdue.push(t);
-      } else if (timeLeft < t.interval / 2) {
-        return tasks.urgent.push(t);
-      } else {
-        return tasks.upcoming.push(t);
-      }
-    });
-
-    return tasks;
   }
 
   onDismissal(index, row) {
