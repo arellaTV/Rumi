@@ -5,7 +5,7 @@ import {
   Text
 } from 'react-native';
 import TaskScene from './resources/TaskScene/TaskScene';
-import AuthScene from './resources/AuthScene/AuthScene';
+import LoginView from './resources/AuthScene/LoginView';
 
 var {
   CardStack,
@@ -32,8 +32,6 @@ class Router extends Component {
     this._renderScene = this._renderScene.bind(this);
   }
   render() {
-    // creates a navigator that pops on backbutton
-    console.log(this.props);
     return (
       <CardStack
         onNavigateBack={this._onPopRoute}
@@ -46,7 +44,7 @@ class Router extends Component {
     if (!this.props.loggedIn) {
       // Switch statement for different scenes
       return (
-        <AuthScene loginSuccess={this.props.onLoginSuccess} onPushRoute={this._onPushRoute} onPopRoute={this._onPopRoute} onSceneChange={this._onSceneChange} />
+        <LoginView loginSuccess={this.props.onLoginSuccess} onPushRoute={this._onPushRoute} onPopRoute={this._onPopRoute} onSceneChange={this._onSceneChange} />
       );
     } else {
       // Could have a switch statement here for different scenes

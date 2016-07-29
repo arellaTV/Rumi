@@ -1,44 +1,11 @@
 import React from 'react';
 import {
-  AsyncStorage,
   Text,
-  TextInput,
   TouchableNativeFeedback,
   View
 } from 'react-native';
-import FBSDK from 'react-native-fbsdk';
 
-const {
-  LoginButton
-} = 'react-native-fbsdk';
-
-var login = function(userInfo) {
-  console.log(userInfo);
-  return fetch('http://192.168.56.1:3000/auth/local', {
-    method: 'POST',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(userInfo)
-  }).then((res) => {
-    return res.json();
-  }).then(token => {
-    return AsyncStorage.setItem('@Rumi:token', token);
-  }).then(() => {
-    return true;
-  }).catch(err => {
-    console.log(err);
-  });
-};
-
-var getToken = function() {
-  return AsyncStorage.getItem('@Rumi:token');
-};
-
-export { getToken };
-
-export default class AuthScene extends React.Component {
+export default class RegisterView extends React.Component {
   constructor(props, context) {
     super(props, context);
     this.inputs = {};
@@ -59,6 +26,9 @@ export default class AuthScene extends React.Component {
   render() {
     return (
       <View>
+        <Text>Name:</Text>
+        <TextInput
+          onChangeText={this.onChange.bind(this, 'name')} />
         <Text>Email:</Text>
         <TextInput
           onChangeText={this.onChange.bind(this, 'email')} />
@@ -67,7 +37,12 @@ export default class AuthScene extends React.Component {
           onChangeText={this.onChange.bind(this, 'password')} />
         <TouchableNativeFeedback onPress={this.onSubmit.bind(this)}>
           <View style={{width: 50, height: 25, backgroundColor: 'grey'}}>
-            <Text>Login</Text>
+            <Text>Submit</Text>
+          </View>
+        </TouchableNativeFeedback>
+        <TouchableNativeFeedback onPress={this.onRegisterClick.bind(this)}>
+          <View style={{width: 50, height: 25, backgroundColor: 'grey'}}>
+            <Text>Already have a user? Sign in..</Text>
           </View>
         </TouchableNativeFeedback>
       </View>
