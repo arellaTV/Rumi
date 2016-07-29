@@ -12,5 +12,8 @@
     "react-native-vector-icons": "^2.0.3",
     "react-native-fbsdk": "^0.3.0",
     "socket.io-client": "^1.4.8"
+  },
+  "devDependencies": {
+    "node-sass": "^3.8.0"
   }
 }
