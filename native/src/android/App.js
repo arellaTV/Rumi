@@ -41,7 +41,7 @@ class Router extends Component {
       );
   }
   _renderScene(sceneProps) {
-    if (this.props.loggedIn) {
+    if (!this.props.loggedIn) {
       return (
         <AuthScene />
       );

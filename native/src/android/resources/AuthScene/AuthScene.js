@@ -9,10 +9,22 @@ import FBSDK from 'react-native-fbsdk';
 
 const {
   LoginButton
-} from 'react-native-fbsdk';
+} = 'react-native-fbsdk';
 
-var login = function() {
-
+var login = function(userInfo) {
+  console.log(userInfo);
+  fetch('http://192.168.56.1:3000/auth/local', {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(userInfo)
+  }).then((token) => {
+    console.log(token);
+  }).catch(err => {
+    console.log(err);
+  });
 };
 
 export default class AuthScene extends React.Component {
@@ -24,14 +36,14 @@ export default class AuthScene extends React.Component {
     this.inputs[key] = val;
   }
   onSubmit() {
-    console.log(this.inputs);
+    login(this.inputs);
   }
   render() {
     return (
       <View>
-        <Text>Username:</Text>
+        <Text>Email:</Text>
         <TextInput
-          onChangeText={this.onChange.bind(this, 'username')} />
+          onChangeText={this.onChange.bind(this, 'email')} />
         <Text>Password:</Text>
         <TextInput
           onChangeText={this.onChange.bind(this, 'password')} />
@@ -40,19 +52,6 @@ export default class AuthScene extends React.Component {
             <Text>Login</Text>
           </View>
         </TouchableNativeFeedback>
-        <LoginButton
-          onLoginFinished={
-              (error, result) => {
-                if (error) {
-                  alert("Login failed with error: " + result.error);
-                } else if (result.isCancelled) {
-                  alert("Login was cancelled");
-                } else {
-                  alert("Login was successful with permissions: " + result.grantedPermissions)
-                }
-              }
-            }
-            onLogoutFinished={() => alert("User logged out")}/>
       </View>
     )
   }
