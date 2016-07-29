@@ -25,12 +25,12 @@ export default class TaskScene extends React.Component {
     return view;
   }
   render() {
-    var view = getView(props.targetView);
+    var view = this.getView(this.props.targetView);
     return (
       <DrawerLayoutAndroid
-        drawerWidth={300}
+        drawerWidth={200}
         drawerPosition={DrawerLayoutAndroid.positions.Right}
-        renderNavigationView={() => <MenuBar />}>
+        renderNavigationView={() => <MenuBar onPushRoute={this.props.onPushRoute} />}>
         {view}
       </DrawerLayoutAndroid>
     );
