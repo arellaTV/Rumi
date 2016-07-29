@@ -3,8 +3,6 @@ import {
   ListView,
   StyleSheet,
   Text,
-  TouchableNativeFeedback,
-  TouchableHighlight,
   View
 } from 'react-native';
 import socket from '../../socketClient';
@@ -83,21 +81,13 @@ class TaskListView extends Component {
     return tasks;
   }
 
-  onDismissal(e) {
-    console.log('in dismissal, id is', e);
-    socket.emit('get all tasks');
-    socket.on('sending all tasks', (data) => {
-      for (var i = 0; i < data.length; i++) {
-        if (data[i].id === e.id) {
-          data.splice(i, 1);
-        }
-      }
-      this.state.completedTasks.unshift(e);
-      this.setState({
-        dataSource: this.ds.cloneWithRows(data),
-        completedTasks: this.state.completedTasks
-      });
-    });
+  onDismissal(index, row) {
+    var tasks = [this.state.overdueTasks, this.state.urgentTasks, this.state.upcomingTasks];
+    var currentCategory = tasks[row];
+    currentCategory.splice(index, 1);
+    this.setState({
+      currentCategory: currentCategory
+    })
   }
 
   render() {
@@ -117,7 +107,7 @@ class TaskListView extends Component {
                 <View>
                   {categoryName}
                   {category.map((task, index) =>
-                    <Task task={task} onDismissal={this.onDismissal.bind(this, index)}/>
+                    <Task task={task} onDismissal={this.onDismissal.bind(this, index, row)} key={index}/>
                   )}
                 </View>
               );
