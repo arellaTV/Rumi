@@ -41,6 +41,7 @@ class Router extends Component {
       );
   }
   _renderScene(sceneProps) {
+    var targetView = sceneProps.scene.route.targetView;
     if (!this.props.loggedIn) {
       // Switch statement for different scenes
       return (
@@ -80,6 +81,7 @@ class App extends Component {
 
   _onNavigationChange(type, route) {
     let {navigationState} = this.state;
+    route.key = route.targetView + Date.now();
     switch(type) {
       case 'push':
         navigationState = StateUtils.push(navigationState, route);

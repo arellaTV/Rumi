@@ -25,14 +25,14 @@ export default class LoginView extends React.Component {
     login(this.inputs).then(res => {
       if (res === true) {
         this.props.loginSuccess();
-        this.props.onSceneChange({key: 'Task View'});
+        this.props.onSceneChange({targetView: 'TaskView'});
       } else {
         // display some error form
       }
     });
   }
   onRegisterClick() {
-    this.props.onPushRoute({key: 'RegisterView'});
+    this.props.onPushRoute({targetView: 'RegisterView'});
   }
   render() {
     return (
