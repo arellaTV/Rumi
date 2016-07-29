@@ -100,17 +100,21 @@ class TaskListView extends Component {
   }
 
   render() {
-    var tasks = [this.state.overdueTasks, this.state.urgentTasks, this.state.overdueTasks];
+    var tasks = [this.state.overdueTasks, this.state.urgentTasks, this.state.upcomingTasks];
+    var categoryNames = ['Overdue:', 'Urgent:', 'Upcoming:']
     return (
       <View style={styles.taskList}>
         <ListView
           dataSource={this.ds.cloneWithRows(tasks)}
           enableEmptySections={true}
           renderRow={
-            (category) => {
+            (category, section, row) => {
+              if (category.length) {
+                var categoryName = <Text>{categoryNames[row]}</Text>;
+              }
               return (
                 <View>
-                  <Text>hello</Text>
+                  {categoryName}
                   {category.map((task) =>
                     <Task task={task}/>
                   )}
