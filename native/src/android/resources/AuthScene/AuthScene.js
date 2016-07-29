@@ -14,7 +14,7 @@ const {
 
 var login = function(userInfo) {
   console.log(userInfo);
-  fetch('http://192.168.56.1:3000/auth/local', {
+  return fetch('http://192.168.56.1:3000/auth/local', {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
@@ -25,6 +25,8 @@ var login = function(userInfo) {
     return res.json();
   }).then(token => {
     return AsyncStorage.setItem('@Rumi:token', token);
+  }).then(() => {
+    return true;
   }).catch(err => {
     console.log(err);
   });
@@ -45,7 +47,14 @@ export default class AuthScene extends React.Component {
     this.inputs[key] = val;
   }
   onSubmit() {
-    login(this.inputs);
+    login(this.inputs).then(res => {
+      if (res === true) {
+        this.props.loginSuccess();
+        this.props.onSceneChange({key: 'Task View'});
+      } else {
+        // display some error form
+      }
+    });
   }
   render() {
     return (
