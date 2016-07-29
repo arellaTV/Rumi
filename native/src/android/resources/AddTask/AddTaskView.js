@@ -11,54 +11,50 @@ import {
   Image } from 'react-native';
 
 import socket from '../../socketClient';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const styles = StyleSheet.create({
   footer: {
-    backgroundColor: '#252A34',
+    backgroundColor: '#303030',
     flex: 0.2,
-    alignItems: 'center',
-    justifyContent: 'center'
+    alignItems: 'center'
   },
   showModal: {
-    textAlign: 'center', 
-    color: '#08D9D6'
+    width: 65,
+    height: 100,
+    backgroundColor: '#28BF32',
+    alignItems: 'center',
+    paddingTop: 10
   },
   modal: {
-    backgroundColor: '#252A34',
+    backgroundColor: '#303030',
     alignItems: 'stretch',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     paddingBottom: 250,
     flex: 1
   },
   header: {
-    backgroundColor: '#252A34',
+    backgroundColor: '#303030',
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'space-around',
     alignItems: 'center',
   },
   hideModal: {
-    backgroundColor: '#252A34',
-    color: '#08D9D6',
-    fontSize: 20
+    backgroundColor: '#303030',
+    color: '#28BF32',
+    fontSize: 20,
   },
-  submitButton: {
-    width: 100,
-    height: 40, 
-    backgroundColor: '#08D9D6',
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  submitText: {
-    color: '#252A34',
-    fontSize: 18,
-    alignItems: 'center',
-    justifyContent: 'center'
+  submitTask: {
+    backgroundColor: '#303030',
+    color: '#28BF32',
+    fontSize: 20,
   },
   newTask: {
     margin: 10, 
     fontSize: 24, 
     color: '#EAEAEA',
-    textAlign: 'center'
+    textAlign: 'center',
+    fontFamily: 'Roboto'
   },
   title: {
     fontSize: 20,
@@ -66,15 +62,19 @@ const styles = StyleSheet.create({
     margin: 20
   },
   input: {
-    width: 500,
+    width: 370,
     height: 40,
-    backgroundColor: '#EAEAEA'
+    backgroundColor: '#EAEAEA',
+    marginLeft: 20
   },
   recurrance: {
     flexDirection: 'row',
+    justifyContent: 'space-around',
     alignItems: 'center',
     backgroundColor: '#EAEAEA',
-    height: 40
+    width: 370,
+    height: 40,
+    marginLeft: 20
   }
   
 });
@@ -130,7 +130,9 @@ class AddTask extends Component {
         <TouchableHighlight  onPress={() => {
           this.setModalVisible(true)
         }}>
-          <Text style={styles.showModal}>Show Modal</Text>
+          <View style={styles.showModal}>
+            <Icon name="plus" size={40} color="#EAEAEA" />
+          </View>
         </TouchableHighlight>
       
         <View>
@@ -144,12 +146,12 @@ class AddTask extends Component {
               <TouchableHighlight onPress={() => {
                 this.setModalVisible(!this.state.modalVisible)
               }}>
-                <Text style={styles.hideModal}> Back</Text>
+                <Text style={styles.hideModal}> Cancel </Text>
               </TouchableHighlight>
               <Text style={styles.newTask}>New Task</Text>
               <TouchableNativeFeedback onPress={this.onSubmit.bind(this)}>
-                <View style={styles.submitButton}> 
-                  <Text style={styles.submitText}>Submit</Text>
+                <View> 
+                  <Text style={styles.submitTask}>Save</Text>
                 </View>
               </TouchableNativeFeedback>
 
