@@ -6,6 +6,7 @@ import {
 } from 'react-native';
 import TaskScene from './resources/TaskScene/TaskScene';
 import LoginView from './resources/AuthScene/LoginView';
+import RegisterView from './resources/AuthScene/RegisterView';
 
 var {
   CardStack,
@@ -44,9 +45,15 @@ class Router extends Component {
     var targetView = sceneProps.scene.route.targetView;
     if (!this.props.loggedIn) {
       // Switch statement for different scenes
-      return (
-        <LoginView loginSuccess={this.props.onLoginSuccess} onPushRoute={this._onPushRoute} onPopRoute={this._onPopRoute} onSceneChange={this._onSceneChange} />
-      );
+      if (targetView === 'RegisterView') {
+        return (
+          <RegisterView loginSuccess={this.props.onLoginSuccess} onPushRoute={this._onPushRoute} onPopRoute={this._onPopRoute} onSceneChange={this._onSceneChange} />
+        );
+      } else {
+        return (
+          <LoginView loginSuccess={this.props.onLoginSuccess} onPushRoute={this._onPushRoute} onPopRoute={this._onPopRoute} onSceneChange={this._onSceneChange} />
+        )
+      }
     } else {
       // Could have a switch statement here for different scenes
       return (
@@ -67,7 +74,7 @@ class App extends Component {
     this.state = {
       navigationState: {
         index: 0,
-        routes: [{key: 'Task List'}]
+        routes: [{key: 'Init', targetView: 'LoginView'}]
       },
       loggedIn: false
     };
@@ -81,9 +88,9 @@ class App extends Component {
 
   _onNavigationChange(type, route) {
     let {navigationState} = this.state;
-    route.key = route.targetView + Date.now();
     switch(type) {
       case 'push':
+        route.key = route.targetView + Date.now();
         navigationState = StateUtils.push(navigationState, route);
         break;
       case 'pop':

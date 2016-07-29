@@ -1,6 +1,7 @@
 import React from 'react';
 import {
   Text,
+  TextInput,
   TouchableNativeFeedback,
   View
 } from 'react-native';
@@ -14,14 +15,14 @@ export default class RegisterView extends React.Component {
     this.inputs[key] = val;
   }
   onSubmit() {
-    login(this.inputs).then(res => {
-      if (res === true) {
-        this.props.loginSuccess();
-        this.props.onSceneChange({key: 'Task View'});
-      } else {
-        // display some error form
-      }
-    });
+    // login(this.inputs).then(res => {
+    //   if (res === true) {
+    //     this.props.loginSuccess();
+    //     this.props.onSceneChange({key: 'Task View'});
+    //   } else {
+    //     // display some error form
+    //   }
+    // });
   }
   render() {
     return (
@@ -40,7 +41,7 @@ export default class RegisterView extends React.Component {
             <Text>Submit</Text>
           </View>
         </TouchableNativeFeedback>
-        <TouchableNativeFeedback onPress={this.onRegisterClick.bind(this)}>
+        <TouchableNativeFeedback>
           <View style={{width: 50, height: 25, backgroundColor: 'grey'}}>
             <Text>Already have a user? Sign in..</Text>
           </View>
