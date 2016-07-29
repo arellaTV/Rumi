@@ -5,6 +5,7 @@ import {
   TouchableNativeFeedback,
   View
 } from 'react-native';
+import { register } from './Auth';
 
 export default class RegisterView extends React.Component {
   constructor(props, context) {
@@ -15,14 +16,14 @@ export default class RegisterView extends React.Component {
     this.inputs[key] = val;
   }
   onSubmit() {
-    // login(this.inputs).then(res => {
-    //   if (res === true) {
-    //     this.props.loginSuccess();
-    //     this.props.onSceneChange({key: 'Task View'});
-    //   } else {
-    //     // display some error form
-    //   }
-    // });
+    register(this.inputs).then(res => {
+      if (res === true) {
+        this.props.loginSuccess();
+        this.props.onSceneChange({targetView: 'TaskView'});
+      } else {
+        // display some error form
+      }
+    });
   }
   render() {
     return (
@@ -38,12 +39,12 @@ export default class RegisterView extends React.Component {
           onChangeText={this.onChange.bind(this, 'password')} />
         <TouchableNativeFeedback onPress={this.onSubmit.bind(this)}>
           <View style={{width: 50, height: 25, backgroundColor: 'grey'}}>
-            <Text>Submit</Text>
+            <Text>Register</Text>
           </View>
         </TouchableNativeFeedback>
         <TouchableNativeFeedback>
           <View style={{width: 50, height: 25, backgroundColor: 'grey'}}>
-            <Text>Already have a user? Sign in..</Text>
+            <Text>Login with existing account</Text>
           </View>
         </TouchableNativeFeedback>
       </View>
