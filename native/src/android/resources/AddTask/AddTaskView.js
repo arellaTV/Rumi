@@ -57,6 +57,7 @@ class AddTask extends Component {
       dueBy: this.state.duedate,
       interval: this.state.taskInterval
     });
+    socket.emit('get all tasks');
   }
 
   render() {
@@ -83,10 +84,12 @@ class AddTask extends Component {
               }}>
                 <Text style={styles.hideModal}> Cancel </Text>
               </TouchableHighlight>
-              
               <Text style={styles.newTaskTitle}>New Task</Text>
-              
-              <TouchableNativeFeedback onPress={this.onSubmit.bind(this)}>
+              <TouchableNativeFeedback onPress={() => {
+                  this.onSubmit.bind(this);
+                  this.setModalVisible(!this.state.modalVisible);
+                }
+              }>
                 <View>
                   <Text style={styles.submitTask}>Save</Text>
                 </View>
@@ -97,7 +100,7 @@ class AddTask extends Component {
 
 
             </View>
-           
+
             <View style={styles.modal}>
               <Text style={styles.title}>Name:</Text>
                 <TextInput
