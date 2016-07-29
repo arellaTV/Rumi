@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  AsyncStorage,
   Text,
   TextInput,
   TouchableNativeFeedback,
@@ -23,11 +24,17 @@ var login = function(userInfo) {
   }).then((res) => {
     return res.json();
   }).then(token => {
-    console.log(token);
+    return AsyncStorage.setItem('@Rumi:token', token);
   }).catch(err => {
     console.log(err);
   });
 };
+
+var getToken = function() {
+  return AsyncStorage.getItem('@Rumi:token');
+};
+
+export { getToken };
 
 export default class AuthScene extends React.Component {
   constructor(props, context) {
