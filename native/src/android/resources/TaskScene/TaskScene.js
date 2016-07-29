@@ -4,6 +4,7 @@ import AddTask from '../AddTask/AddTaskView';
 import TappableRow from '../stateless/TappableRow';
 import MenuBar from '../stateless/MenuBar';
 import TaskList from '../TaskList/TaskListView';
+import CompleteTask from '../CompleteTask/CompleteTaskView';
 
 export default class TaskScene extends React.Component {
   render() {
@@ -17,11 +18,9 @@ export default class TaskScene extends React.Component {
         </Text>
         <TappableRow text="Task 1" onPress={this.props.onPushRoute}/>
         <TappableRow text="Task 2" onPress={this.props.onPushRoute}/>
-        <TaskList />
+        <CompleteTask />
         {/* Temp placed here*/}
       </DrawerLayoutAndroid>
     )
   }
 }
-
-// <AddTask />
