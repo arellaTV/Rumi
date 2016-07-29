@@ -8,27 +8,7 @@ import {
   View
 } from 'react-native';
 import socket from '../../socketClient';
-
-const styles = StyleSheet.create({
-  taskList: {
-    backgroundColor: '#EAEAEA',
-    flex: 2,
-    alignItems: 'stretch',
-  },
-  taskCard: {
-    backgroundColor: '#fff',
-    flex: 2,
-    justifyContent: 'space-around',
-  },
-  titleText: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    textAlign: 'center',
-  },
-  baseText: {
-    fontSize: 20,
-  },
-});
+import styles from '../../assets/styles.js';
 
 const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 

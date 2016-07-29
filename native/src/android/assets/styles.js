@@ -65,5 +65,23 @@ module.exports = require('react-native').StyleSheet.create({
         "justifyContent": "space-around",
         "backgroundColor": "#EAEAEA",
         "height": 40
+    },
+    "taskList": {
+        "backgroundColor": "#EAEAEA",
+        "flex": 2,
+        "alignItems": "stretch"
+    },
+    "taskCard": {
+        "backgroundColor": "#fff",
+        "flex": 2,
+        "justifyContent": "space-around"
+    },
+    "titleText": {
+        "fontSize": 24,
+        "fontWeight": "bold",
+        "textAlign": "center"
+    },
+    "baseText": {
+        "fontSize": 20
     }
 });

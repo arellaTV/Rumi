@@ -83,7 +83,9 @@ class AddTask extends Component {
               }}>
                 <Text style={styles.hideModal}> Cancel </Text>
               </TouchableHighlight>
+              
               <Text style={styles.newTaskTitle}>New Task</Text>
+              
               <TouchableNativeFeedback onPress={this.onSubmit.bind(this)}>
                 <View>
                   <Text style={styles.submitTask}>Save</Text>
@@ -94,6 +96,9 @@ class AddTask extends Component {
             <View  style={styles.modal}>
 
 
+            </View>
+           
+            <View style={styles.modal}>
               <Text style={styles.title}>Name:</Text>
                 <TextInput
                   style={styles.input}
@@ -120,9 +125,6 @@ class AddTask extends Component {
                 style={styles.input}
                 onChangeText={(text) => this.setState({details: text})}
                 multiline={true}/>
-
-
-
             </View>
           </Modal>
         </View>

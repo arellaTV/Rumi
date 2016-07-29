@@ -5,30 +5,9 @@ import {
   Text,
   View
 } from 'react-native';
+import styles from '../../assets/styles.js';
 import socket from '../../socketClient';
-import Task from './TaskItem'
-
-const styles = StyleSheet.create({
-  taskList: {
-    backgroundColor: '#EAEAEA',
-    flex: 2,
-    alignItems: 'stretch',
-  },
-  taskCard: {
-    backgroundColor: '#fff',
-    flex: 2,
-    justifyContent: 'space-around',
-  },
-  titleText: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    textAlign: 'center',
-  },
-  baseText: {
-    fontSize: 20,
-  },
-});
-
+import Task from './TaskItem'; 
 
 class TaskListView extends Component {
   constructor(props) {

@@ -12,7 +12,7 @@ $accentColor: #28BF32;
   margin-left: 20;
 }
 
-///////////////// ADD TASK MODAL ///////////////////////
+
 
 footer {
   @include center-children;
@@ -80,5 +80,24 @@ input {
   height: 40;
 }
 
-///////////////// ADD TASK MODAL ///////////////////////
-  
+.taskList {
+  background-color: $primaryColor;
+  flex: 2;
+  align-items: stretch;
+}
+
+.taskCard {
+  background-color: #fff;
+  flex: 2;
+  justify-content: space-around;
+}
+
+.titleText {
+  font-size: 24;
+  font-weight: bold;
+  text-align: center;
+}
+
+.baseText {
+  font-size: 20;
+}
