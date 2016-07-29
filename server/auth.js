@@ -109,7 +109,7 @@ let routes = express.Router();
 
 routes.post('/auth/local', (req, res) => {
   login(req.body.email, req.body.password).then((token) => {
-    res.send(token);
+    res.send(JSON.stringify(token));
   }).catch((err) => {
     res.send(err);
   });
@@ -117,7 +117,7 @@ routes.post('/auth/local', (req, res) => {
 
 routes.post('/auth/local/register', (req, res) => {
   register(req.body).then(token => {
-    res.send(token);
+    res.send(JSON.stringify(token));
   }).catch(err => {
     res.send(err);
   });

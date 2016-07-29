@@ -20,7 +20,9 @@ var login = function(userInfo) {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify(userInfo)
-  }).then((token) => {
+  }).then((res) => {
+    return res.json();
+  }).then(token => {
     console.log(token);
   }).catch(err => {
     console.log(err);
