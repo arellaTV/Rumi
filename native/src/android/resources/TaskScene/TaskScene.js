@@ -3,7 +3,7 @@ import { DrawerLayoutAndroid, Text } from 'react-native';
 import AddTask from '../AddTask/AddTaskView';
 import TappableRow from '../stateless/TappableRow';
 import MenuBar from '../stateless/MenuBar';
-import TaskList from '../taskListView/taskListView';
+import TaskList from '../TaskList/TaskListView';
 
 export default class TaskScene extends React.Component {
   render() {
@@ -19,8 +19,9 @@ export default class TaskScene extends React.Component {
         <TappableRow text="Task 2" onPress={this.props.onPushRoute}/>
         <TaskList />
         {/* Temp placed here*/}
-        <AddTask />
       </DrawerLayoutAndroid>
     )
   }
 }
+
+// <AddTask />
