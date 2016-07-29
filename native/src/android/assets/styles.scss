@@ -1,58 +1,62 @@
-$primaryColor: #EAEAEA; // light gray
-$secondaryColor: #303030; // dark gray
-$accentColor: #28BF32; // green
+$primaryColor: #EAEAEA; 
+$secondaryColor: #303030; 
+$accentColor: #28BF32; 
 
 @mixin center-children {
   display: flex;
   align-items: center;
 }
 
+@mixin offset-width {
+  width: 375;
+  margin-left: 20;
+}
+
+///////////////// ADD TASK MODAL ///////////////////////
+
 footer {
   @include center-children;
-  background: $secondaryColor;
+  background-color: $secondaryColor;
   flex: 0.2;
 }
 
-showModal {
+.showModal {
   width: 65;
   height: 100;
-  background: $accentColor;
-  align-items: 'center';
+  background-color: $accentColor;
+  align-items: center;
   padding-top: 10;
 }
 
-modal {
-  background: $secondaryColor;
-  align-items: 'stretch';
-  justify-content: : 'flex-start';
+.modal {
+  background-color: $secondaryColor;
+  align-items: stretch;
+  justify-content: flex-start;
   padding-bottom: 250;
   flex: 1;
+  &Header {
+    @include center-children;
+    background-color: $secondaryColor;
+    flex-direction: row;
+    justify-content: space-around;
+  }
 }
 
-header {
-  @include center-children;
-  background: $secondaryColor;
-  flex-direction: 'row';
-  justify-content: : 'space-around';
+.hideModal {
+  background-color: $secondaryColor;
+  color: $accentColor;
+  font-size: 20;
 }
 
-hideModal {
-  background: $secondaryColor;
-  color: $accentColor;
-  font-size: 20;
-  }
+.submitTask {
+  @extend .hideModal;
+}
 
-submitTask {
-  background: $secondaryColor;
-  color: $accentColor;
-  font-size: 20;
-  }
-
-newTask {
-  margin: 10, 
-  font-size: 24, 
+.newTaskTitle {
+  margin: 10; 
+  font-size: 24; 
   color: $primaryColor;
-  text-align: 'center';
+  text-align: center;
 }
 
 title {
@@ -62,19 +66,19 @@ title {
 }
 
 input {
-  width: 370;
+  @include offset-width;
   height: 40;
-  background: $primaryColor;
-  margin-left: 20
+  background-color: $primaryColor;
 }
 
-recurrance {
+.recurrance {
   @include center-children;
-  flex-direction: 'row';
-  justify-content: : 'space-around';
-  background: $primaryColor;
-  width: 370;
+  @include offset-width;
+  flex-direction: row;
+  justify-content: space-around;
+  background-color: $primaryColor;
   height: 40;
-  margin-left: 20;
 }
+
+///////////////// ADD TASK MODAL ///////////////////////
   

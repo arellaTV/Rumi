@@ -1,5 +1,57 @@
-h1 {
-  color: "black"; }
+footer {
+  display: flex;
+  align-items: center;
+  background-color: #303030;
+  flex: 0.2; }
 
-h2 {
-  text-align: left; }
+.showModal {
+  width: 65;
+  height: 100;
+  background-color: #28BF32;
+  align-items: center;
+  padding-top: 10; }
+
+.modal {
+  background-color: #303030;
+  align-items: stretch;
+  justify-content: flex-start;
+  padding-bottom: 250;
+  flex: 1; }
+  .modalHeader {
+    display: flex;
+    align-items: center;
+    background-color: #303030;
+    flex-direction: row;
+    justify-content: space-around; }
+
+.hideModal, .submitTask {
+  background-color: #303030;
+  color: #28BF32;
+  font-size: 20; }
+
+.newTaskTitle {
+  margin: 10;
+  font-size: 24;
+  color: #EAEAEA;
+  text-align: center; }
+
+title {
+  font-size: 20;
+  color: #EAEAEA;
+  margin: 20; }
+
+input {
+  width: 375;
+  margin-left: 20;
+  height: 40;
+  background-color: #EAEAEA; }
+
+.recurrance {
+  display: flex;
+  align-items: center;
+  width: 375;
+  margin-left: 20;
+  flex-direction: row;
+  justify-content: space-around;
+  background-color: #EAEAEA;
+  height: 40; }

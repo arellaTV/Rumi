@@ -77,13 +77,13 @@ class AddTask extends Component {
             visible={this.state.modalVisible}
             onRequestClose={() => {alert("Modal has been closed.")}}
             >
-            <View style={styles.header}>
+            <View style={styles.modalHeader}>
               <TouchableHighlight onPress={() => {
                 this.setModalVisible(!this.state.modalVisible)
               }}>
                 <Text style={styles.hideModal}> Cancel </Text>
               </TouchableHighlight>
-              <Text style={styles.newTask}>New Task</Text>
+              <Text style={styles.newTaskTitle}>New Task</Text>
               <TouchableNativeFeedback onPress={this.onSubmit.bind(this)}>
                 <View>
                   <Text style={styles.submitTask}>Save</Text>
