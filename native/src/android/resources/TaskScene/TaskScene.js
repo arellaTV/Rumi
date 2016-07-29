@@ -13,12 +13,7 @@ export default class TaskScene extends React.Component {
         drawerWidth={300}
         drawerPosition={DrawerLayoutAndroid.positions.Right}
         renderNavigationView={() => <MenuBar />}>
-        <Text>
-          Route: {this.props.route.key}
-        </Text>
-        <TappableRow text="Task 1" onPress={this.props.onPushRoute}/>
-        <TappableRow text="Task 2" onPress={this.props.onPushRoute}/>
-        <CompleteTask />
+        <TaskList />
         {/* Temp placed here*/}
       </DrawerLayoutAndroid>
     )
