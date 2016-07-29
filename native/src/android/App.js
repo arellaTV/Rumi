@@ -88,9 +88,10 @@ class App extends Component {
 
   _onNavigationChange(type, route) {
     let {navigationState} = this.state;
+    var route = route || {};
+    route.key = 'Route at: ' + Date.now();
     switch(type) {
       case 'push':
-        route.key = route.targetView + Date.now();
         navigationState = StateUtils.push(navigationState, route);
         break;
       case 'pop':
