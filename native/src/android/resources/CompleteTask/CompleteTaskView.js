@@ -35,7 +35,10 @@ class CompleteTask extends Component {
     super(props);
     this.ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
-      completedTasks: []
+      completedTasks: [
+        {"id": 1, "name": "Do Dishes", "due": "Tomorrow"},
+        {"id": 2, "name": "Wash Laundry", "due": "Friday"}
+      ]
     };
   }
 
@@ -51,34 +54,25 @@ class CompleteTask extends Component {
     });
   }
 
-  onDismissal(index, row) {
-    var tasks = [this.state.overdueTasks, this.state.urgentTasks, this.state.upcomingTasks];
-    var currentCategory = tasks[row];
-    currentCategory.splice(index, 1);
+  onDismissal(index) {
+    this.state.completedTasks.splice(index, 1);
     this.setState({
-      currentCategory: currentCategory
+      completedTasks: this.state.completedTasks
     })
   }
 
   render() {
-    var tasks = [this.state.overdueTasks, this.state.urgentTasks, this.state.upcomingTasks];
-    var categoryNames = ['Overdue:', 'Urgent:', 'Upcoming:']
     return (
       <View style={styles.taskList}>
         <ListView
-          dataSource={this.ds.cloneWithRows(tasks)}
+          dataSource={this.ds.cloneWithRows(this.state.completedTasks)}
           enableEmptySections={true}
           renderRow={
-            (category, section, row) => {
-              if (category.length) {
-                var categoryName = <Text>{categoryNames[row]}</Text>;
-              }
+            (task, section, index) => {
               return (
                 <View>
-                  {categoryName}
-                  {category.map((task, index) =>
-                    <Task task={task} onDismissal={this.onDismissal.bind(this, index, row)} key={index}/>
-                  )}
+                  <Text>Completed Tasks</Text>
+                  <Task task={task} onDismissal={this.onDismissal.bind(this, index)}/>
                 </View>
               );
             }
