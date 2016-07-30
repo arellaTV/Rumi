@@ -29,8 +29,8 @@ function decorate(app, session) {
     // socket.on('read task', readTask);
     socket.on('update task', updateTask);
     socket.on('archive task', archiveTask);
-    // socket.on('unarchive task', notYetImplemented.bind(null, 'unarchive task'));
-    socket.on('complete task', /*completeTask(1)*/ (taskId) => { console.log(taskId) } );
+    socket.on('unarchive task', notYetImplemented.bind(null, 'unarchive task'));
+    socket.on('complete task', completeTask(socket.request.session.passport.user));
 
     socket.on('get all tasks', getAllTasks(socket));
     socket.on('get completeds', getCompleteds(socket));
