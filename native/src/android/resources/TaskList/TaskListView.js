@@ -80,14 +80,14 @@ class TaskListView extends Component {
           renderRow={
             (category, section, row) => {
               if (category.length) {
-                var categoryName = <Text>{categoryNames[row]}</Text>;
+                var categoryName = <Text style={styles.categoryName}>{categoryNames[row]}</Text>;
               }
               return (
-                <View>
-                  {categoryName}
-                  {category.map((task, index) =>
-                    <Task task={task} onDismissal={this.onDismissal.bind(this, index, row)} key={index}/>
-                  )}
+                <View >
+                  <Text style={styles.categoryName}> {categoryName} </Text> 
+                    {category.map((task, index) =>
+                      <Task task={task} onDismissal={this.onDismissal.bind(this, index, row)} key={index}/>
+                    )}
                 </View>
               );
             }

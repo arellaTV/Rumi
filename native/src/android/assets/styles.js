@@ -25,26 +25,30 @@ module.exports = require('react-native').StyleSheet.create({
         "justifyContent": "space-around"
     },
     "hideModal": {
+        "fontFamily": "Roboto",
+        "fontSize": 20,
         "backgroundColor": "#303030",
-        "color": "#28BF32",
-        "fontSize": 20
+        "color": "#28BF32"
     },
     "submitTask": {
+        "fontFamily": "Roboto",
+        "fontSize": 20,
         "backgroundColor": "#303030",
-        "color": "#28BF32",
-        "fontSize": 20
+        "color": "#28BF32"
     },
     "newTaskTitle": {
+        "fontFamily": "Roboto",
+        "fontSize": 24,
         "marginTop": 10,
         "marginBottom": 10,
         "marginRight": 10,
         "marginLeft": 10,
-        "fontSize": 24,
         "color": "#EAEAEA",
         "textAlign": "center"
     },
     "title": {
-        "fontSize": 20,
+        "fontFamily": "Roboto",
+        "fontSize": 24,
         "color": "#EAEAEA",
         "marginTop": 20,
         "marginBottom": 20,
@@ -69,19 +73,43 @@ module.exports = require('react-native').StyleSheet.create({
     "taskList": {
         "backgroundColor": "#EAEAEA",
         "flex": 2,
-        "alignItems": "stretch"
-    },
-    "taskCard": {
-        "backgroundColor": "#fff",
-        "flex": 2,
+        "flexDirection": "column",
         "justifyContent": "space-around"
     },
-    "titleText": {
+    "categoryName": {
+        "fontFamily": "Roboto",
         "fontSize": 24,
-        "fontWeight": "bold",
-        "textAlign": "center"
+        "backgroundColor": "#28BF32",
+        "color": "#EAEAEA",
+        "alignItems": "center"
+    },
+    "taskCard": {
+        "width": 375,
+        "marginLeft": 20,
+        "backgroundColor": "#fff",
+        "paddingTop": 20,
+        "paddingBottom": 20,
+        "paddingRight": 20,
+        "paddingLeft": 20,
+        "marginBottom": 10
+    },
+    "taskElements": {
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+        "alignItems": "flex-end"
+    },
+    "taskText": {
+        "flexDirection": "column",
+        "justifyContent": "space-between"
+    },
+    "titleText": {
+        "fontFamily": "Roboto",
+        "fontSize": 26,
+        "textAlign": "center",
+        "paddingBottom": 10
     },
     "baseText": {
+        "fontFamily": "Roboto",
         "fontSize": 20
     }
 });

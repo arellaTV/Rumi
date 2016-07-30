@@ -25,18 +25,21 @@ footer {
     justify-content: space-around; }
 
 .hideModal, .submitTask {
+  font-family: Roboto;
+  font-size: 20;
   background-color: #303030;
-  color: #28BF32;
-  font-size: 20; }
+  color: #28BF32; }
 
 .newTaskTitle {
-  margin: 10;
+  font-family: Roboto;
   font-size: 24;
+  margin: 10;
   color: #EAEAEA;
   text-align: center; }
 
 title {
-  font-size: 20;
+  font-family: Roboto;
+  font-size: 24;
   color: #EAEAEA;
   margin: 20; }
 
@@ -59,17 +62,38 @@ input {
 .taskList {
   background-color: #EAEAEA;
   flex: 2;
-  align-items: stretch; }
-
-.taskCard {
-  background-color: #fff;
-  flex: 2;
+  flex-direction: column;
   justify-content: space-around; }
 
-.titleText {
+.categoryName {
+  font-family: Roboto;
   font-size: 24;
-  font-weight: bold;
-  text-align: center; }
+  background-color: #28BF32;
+  color: #EAEAEA;
+  align-items: center; }
+
+.taskCard {
+  width: 375;
+  margin-left: 20;
+  background-color: #fff;
+  padding: 20;
+  margin-bottom: 10; }
+
+.taskElements {
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end; }
+
+.taskText {
+  flex-direction: column;
+  justify-content: space-between; }
+
+.titleText {
+  font-family: Roboto;
+  font-size: 26;
+  text-align: center;
+  padding-bottom: 10; }
 
 .baseText {
+  font-family: Roboto;
   font-size: 20; }

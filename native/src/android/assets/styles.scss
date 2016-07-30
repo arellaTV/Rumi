@@ -1,6 +1,7 @@
 $primaryColor: #EAEAEA; 
 $secondaryColor: #303030; 
 $accentColor: #28BF32; 
+$font: Roboto;
 
 @mixin center-children {
   display: flex;
@@ -12,7 +13,22 @@ $accentColor: #28BF32;
   margin-left: 20;
 }
 
+@mixin h1 {
+  font-family: $font;
+  font-size: 26;
+}
 
+@mixin h2 {
+  font-family: $font;
+  font-size: 24;
+}
+
+@mixin p {
+  font-family: $font;
+  font-size: 20;
+}
+
+// Add Task View
 
 footer {
   @include center-children;
@@ -43,9 +59,9 @@ footer {
 }
 
 .hideModal {
+  @include p;
   background-color: $secondaryColor;
   color: $accentColor;
-  font-size: 20;
 }
 
 .submitTask {
@@ -53,14 +69,14 @@ footer {
 }
 
 .newTaskTitle {
+  @include h2;
   margin: 10; 
-  font-size: 24; 
   color: $primaryColor;
   text-align: center;
 }
 
 title {
-  font-size: 20;
+  @include h2;
   color: $primaryColor;
   margin: 20
 }
@@ -80,24 +96,48 @@ input {
   height: 40;
 }
 
+// Task List View
+
 .taskList {
   background-color: $primaryColor;
   flex: 2;
-  align-items: stretch;
-}
-
-.taskCard {
-  background-color: #fff;
-  flex: 2;
+  flex-direction: column;
   justify-content: space-around;
 }
 
+.categoryName {
+  @include h2;
+  background-color: $accentColor;
+  color: $primaryColor;
+  align-items: center;
+}
+
+.taskCard {
+ @include offset-width;
+  background-color: #fff;
+  padding: 20;
+  margin-bottom: 10;
+}
+
+.taskElements {
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.taskText {
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 .titleText {
-  font-size: 24;
-  font-weight: bold;
+  @include h1;
   text-align: center;
+  padding-bottom: 10
 }
 
 .baseText {
-  font-size: 20;
+  @include p;
 }
+
+
