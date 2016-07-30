@@ -1,6 +1,7 @@
 import React from 'react';
 import {
   AsyncStorage,
+  Image,
   Text,
   TextInput,
   TouchableNativeFeedback,
@@ -38,12 +39,18 @@ export default class LoginView extends React.Component {
   render() {
     return (
       <View>
-        <Text>Email:</Text>
+        <Image
+          source={require('../../assets/img/android-to-ios.png')}
+        />
+        <Image
+          source={require('../../assets/img/rumi.png')}
+        />
         <TextInput
-          onChangeText={this.onChange.bind(this, 'email')} />
-        <Text>Password:</Text>
+          onChangeText={this.onChange.bind(this, 'email')}
+          placeholder="email address"/>
         <TextInput
-          onChangeText={this.onChange.bind(this, 'password')} />
+          onChangeText={this.onChange.bind(this, 'password')} 
+          placeholder="password"/>
         <TouchableNativeFeedback onPress={this.onSubmit.bind(this)}>
           <View style={{width: 50, height: 25, backgroundColor: 'grey'}}>
             <Text>Login</Text>
