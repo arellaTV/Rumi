@@ -17,18 +17,19 @@ let Completed = require('./models/Completed');
 function decorate(app, session) {
   let server = http.Server(app);
   let io = socketIo(server);
-  
+
   io.on('connection', socket => {
-    auth.verifyToken(socket.request.headers.authorization)
+    console.log(socket.handshake.query.auth);
+    auth.verifyToken(socket.handshake.query.auth)
       .then(token => {
-        return getUserFromToken(token);
+        return auth.getUserFromToken(token);
       })
       .then((user) => {
         socket.on('create task', createTask);
         socket.on('update task', updateTask);
         socket.on('archive task', archiveTask);
         socket.on('unarchive task', notYetImplemented.bind(null, 'unarchive task'));
-        socket.on('complete task', completeTask(user.id));
+        socket.on('complete task', completeTask(user.dataValues.id));
 
         socket.on('get all tasks', getAllTasks(socket));
         socket.on('get completeds', getCompleteds(socket));
@@ -37,7 +38,8 @@ function decorate(app, session) {
           console.log('disconnected');
         });
       })
-      .catch(() => {
+      .catch((err) => {
+        console.log('caught', err);
         return socket.emit('rumi error', {message: 'Please reauthenticate'});
       });
   });
@@ -86,7 +88,8 @@ function decorate(app, session) {
    * connected clients
    * @param  {object} id ID of a Task
    */
-  function completeTask(token) {
+  function completeTask(userId) {
+    console.log(userId);
     return id => {
       return Task.findById(id).then(task => task.complete(userId)).then(completed => {
         completed.reload({ include: [ User, Task ] }).then(completed => {

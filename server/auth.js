@@ -30,9 +30,7 @@ var verifyToken = function(token) {
 };
 
 var getUserFromToken = function(jwt) {
-  return User.findByEmail(jwt.sub).then(user => {
-    resolve(user);
-  });
+  return User.findByEmail(jwt.body.sub);
 };
 
 var login = function(email, password) {
@@ -156,5 +154,6 @@ function isAuth(req, res, next) {
 module.exports = {
   routes,
   getUserFromToken,
-  isAuth
+  isAuth,
+  verifyToken
 };

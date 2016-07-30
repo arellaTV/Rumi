@@ -6,9 +6,7 @@ var socket;
 function connectSocket(auth) {
   socket = io(host, {
     transports: ['websocket'],
-    extraHeaders: {
-      Authorization: auth
-    }
+    query: 'auth=' + auth
   });
 }
 
