@@ -25,7 +25,9 @@ class CompleteTask extends Component {
       });
     });
   }
-
+  componentWillUnmount() {
+    this.socket.removeListeners('sending completeds');
+  }
   render() {
     return (
       <View style={styles.taskList}>

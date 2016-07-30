@@ -47,8 +47,9 @@ export default class LoginView extends React.Component {
           placeholder="email address"
           style={styles.loginInput}/>
         <TextInput
-          onChangeText={this.onChange.bind(this, 'password')} 
+          onChangeText={this.onChange.bind(this, 'password')}
           placeholder="password"
+          secureTextEntry={true}
           style={styles.loginInput}/>
         <TouchableNativeFeedback onPress={this.onSubmit.bind(this)}>
           <View style={styles.loginButton}>

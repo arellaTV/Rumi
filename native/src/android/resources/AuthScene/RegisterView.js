@@ -40,12 +40,13 @@ export default class RegisterView extends React.Component {
           placeholder="full name"
           style={styles.loginInput} />
         <TextInput
-          onChangeText={this.onChange.bind(this, 'email')} 
+          onChangeText={this.onChange.bind(this, 'email')}
           placeholder="email address"
           style={styles.loginInput} />
         <TextInput
-          onChangeText={this.onChange.bind(this, 'password')} 
+          onChangeText={this.onChange.bind(this, 'password')}
           placeholder="password"
+          secureTextEntry={true}
           style={styles.loginInput}/>
         <TouchableNativeFeedback onPress={this.onSubmit.bind(this)}>
           <View style={styles.loginButton}>
