@@ -131,8 +131,15 @@ input {
 .indivMenu {
   flex-direction: row;
   justify-content: flex-start;
-  align-items: center;
-  border-bottom-color: #7AD05D;
+  align-items: stretch;
+  padding: 10;
+  padding-bottom: 15; }
+
+.indivMenuActive {
+  background-color: #7AD05D;
+  flex-direction: row;
+  justify-content: flex-start;
+  flex: 1;
   padding: 10;
   padding-bottom: 15; }
 

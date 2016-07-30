@@ -144,8 +144,17 @@ module.exports = require('react-native').StyleSheet.create({
     "indivMenu": {
         "flexDirection": "row",
         "justifyContent": "flex-start",
-        "alignItems": "center",
-        "borderBottomColor": "#7AD05D",
+        "alignItems": "stretch",
+        "paddingTop": 10,
+        "paddingBottom": 15,
+        "paddingRight": 10,
+        "paddingLeft": 10
+    },
+    "indivMenuActive": {
+        "backgroundColor": "#7AD05D",
+        "flexDirection": "row",
+        "justifyContent": "flex-start",
+        "flex": 1,
         "paddingTop": 10,
         "paddingBottom": 15,
         "paddingRight": 10,
