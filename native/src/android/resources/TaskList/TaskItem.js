@@ -10,7 +10,7 @@ import {
 import socket from '../../socketClient';
 import styles from '../../assets/styles.js';
 import Icon from 'react-native-vector-icons/FontAwesome';
-
+import TimeAgo from 'react-native-timeago'
 
 const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 
@@ -23,8 +23,8 @@ const Task = (props) => (
         <Text style={styles.titleText}> {props.task.name} </Text>
         <View style={styles.taskElements}>
           <View style={styles.taskText}>
-            <Text style={styles.baseText}> Due: {props.task.dueBy} </Text>
-            
+            <Text style={styles.baseText}> Due: <TimeAgo time={props.task.dueBy} /> </Text>
+
             <Text style={styles.baseText}> Last completed by NAME </Text>
           </View>
           <TouchableHighlight onPress={props.onDismissal} >
@@ -33,7 +33,7 @@ const Task = (props) => (
         </View>
       </View>
     </TouchableNativeFeedback>
-    
+
   </View>
 )
 
