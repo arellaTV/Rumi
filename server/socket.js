@@ -19,7 +19,6 @@ function decorate(app, session) {
   let io = socketIo(server);
 
   io.on('connection', socket => {
-<<<<<<< 946451a3135156ac981b0e92d7ed3ef252ac8a9b
     console.log(socket.handshake.query.auth);
     auth.verifyToken(socket.handshake.query.auth)
       .then(token => {
@@ -31,20 +30,6 @@ function decorate(app, session) {
         socket.on('archive task', archiveTask);
         socket.on('unarchive task', notYetImplemented.bind(null, 'unarchive task'));
         socket.on('complete task', completeTask(user.dataValues.id));
-=======
-    // if (!socket.request.session.passport) {
-    //   return socket.emit('rumi error', {message: 'Please reauthenticate'});
-    // }
-    console.log('connected');
-
-    socket.on('create task', createTask);
-    // socket.on('read task', readTask);
-    socket.on('update task', updateTask);
-    socket.on('archive task', archiveTask);
-    // socket.on('unarchive task', notYetImplemented.bind(null, 'unarchive task'));
-    socket.on('complete task', /*completeTask(1)*/ (taskId) => { console.log(taskId) } );
->>>>>>> Connect completed socket
-
         socket.on('get all tasks', getAllTasks(socket));
         socket.on('get completeds', getCompleteds(socket));
 
