@@ -2,7 +2,7 @@ module.exports = require('react-native').StyleSheet.create({
     "footer": {
         "alignItems": "center",
         "backgroundColor": "#383838",
-        "flex": 0.2
+        "flex": 0.15
     },
     "showModal": {
         "width": 65,

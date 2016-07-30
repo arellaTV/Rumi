@@ -33,7 +33,7 @@ $font: Roboto;
 footer {
   @include center-children;
   background-color: $secondaryColor;
-  flex: 0.2;
+  flex: 0.15;
 }
 
 .showModal {

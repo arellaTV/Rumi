@@ -2,7 +2,7 @@ footer {
   display: flex;
   align-items: center;
   background-color: #383838;
-  flex: 0.2; }
+  flex: 0.15; }
 
 .showModal {
   width: 65;
