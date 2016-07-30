@@ -131,6 +131,7 @@ input {
 .indivMenu, .indivMenuActive {
   flex-direction: row;
   justify-content: flex-start;
+  padding-top: 15;
   padding: 10; }
 
 .indivMenuActive {
