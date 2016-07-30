@@ -8,6 +8,7 @@ import CompletedTaskList from '../CompleteTask/CompleteTaskListView';
 
 export default class TaskScene extends React.Component {
   getView(targetView) {
+    this.targetView = targetView;
     var view;
     if (targetView === 'CompletedTaskList') {
       view = (
@@ -18,6 +19,7 @@ export default class TaskScene extends React.Component {
         <TaskList />
       );
     } else {
+      this.targetView = 'TaskList';
       view = (
         <TaskList />
       );
@@ -30,7 +32,7 @@ export default class TaskScene extends React.Component {
       <DrawerLayoutAndroid
         drawerWidth={200}
         drawerPosition={DrawerLayoutAndroid.positions.Right}
-        renderNavigationView={() => <MenuBar onPushRoute={this.props.onPushRoute} />}>
+        renderNavigationView={() => <MenuBar onPushRoute={this.props.onPushRoute} activeView={this.targetView} />}>
         {view}
         <AddTask/>
       </DrawerLayoutAndroid>

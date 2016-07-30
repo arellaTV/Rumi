@@ -29,8 +29,6 @@ class Router extends Component {
     this._onPushRoute = this.props.onNavigationChange.bind(null, 'push');
     this._onPopRoute = this.props.onNavigationChange.bind(null, 'pop');
     this._onSceneChange = this.props.onNavigationChange.bind(null, 'sceneChange');
-    // bind your functions in the constructor
-    // this makes it so you don't have to worry about it elsewhere
     this._renderScene = this._renderScene.bind(this);
   }
   render() {

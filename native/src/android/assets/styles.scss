@@ -1,6 +1,6 @@
-$primaryColor: #EAEAEA; 
-$secondaryColor: #383838; 
-$accentColor: #7AD05D; 
+$primaryColor: #EAEAEA;
+$secondaryColor: #383838;
+$accentColor: #7AD05D;
 $font: Roboto;
 
 @mixin center-children {
@@ -67,7 +67,7 @@ footer {
 
 .newTaskTitle {
   @include h2;
-  margin: 10; 
+  margin: 10;
   color: $primaryColor;
   text-align: center;
 }
@@ -180,8 +180,16 @@ input {
 .indivMenu {
   flex-direction: row;
   justify-content: flex-start;
-  align-items: center;
-  border-bottom-color: $accentColor;
+  align-items: stretch;
+  padding: 10;
+  padding-bottom: 15;
+}
+
+.indivMenuActive {
+  background-color: $accentColor;
+  flex-direction: row;
+  justify-content: flex-start;
+  flex: 1;
   padding: 10;
   padding-bottom: 15;
 }
@@ -189,7 +197,5 @@ input {
 .menuText {
   @include h2;
   margin-left: 5;
-  color: $primaryColor; 
+  color: $primaryColor;
 }
-
-

@@ -88,7 +88,6 @@ function decorate(app, session) {
    * @param  {object} id ID of a Task
    */
   function completeTask(userId) {
-    console.log(userId);
     return id => {
       return Task.findById(id).then(task => task.complete(userId)).then(completed => {
         completed.reload({ include: [ User, Task ] }).then(completed => {
