@@ -128,20 +128,13 @@ input {
   align-items: flex-start;
   flex: 1; }
 
-.indivMenu {
+.indivMenu, .indivMenuActive {
   flex-direction: row;
   justify-content: flex-start;
-  align-items: stretch;
-  padding: 10;
-  padding-bottom: 15; }
+  padding: 10; }
 
 .indivMenuActive {
-  background-color: #7AD05D;
-  flex-direction: row;
-  justify-content: flex-start;
-  flex: 1;
-  padding: 10;
-  padding-bottom: 15; }
+  background-color: #7AD05D; }
 
 .menuText {
   font-family: Roboto;
