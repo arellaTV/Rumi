@@ -29,7 +29,7 @@ class CompleteTask extends Component {
   render() {
     return (
       <View style={styles.taskList}>
-        <Text style={styles.categoryName}>Completed Tasks</Text>
+        <Text style={styles.categoryName}> Completed Tasks</Text>
         <ListView
           dataSource={this.ds.cloneWithRows(this.state.completedTasks)}
           enableEmptySections={true}
