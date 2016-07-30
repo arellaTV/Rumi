@@ -28,7 +28,7 @@ class CompleteTask extends Component {
 
   render() {
     return (
-      <View>
+      <View style={styles.taskList}>
         <Text style={styles.categoryName}>Completed Tasks</Text>
         <ListView
           dataSource={this.ds.cloneWithRows(this.state.completedTasks)}
