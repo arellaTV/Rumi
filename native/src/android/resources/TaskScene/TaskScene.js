@@ -4,18 +4,35 @@ import AddTask from '../AddTask/AddTaskView';
 import TappableRow from '../stateless/TappableRow';
 import MenuBar from '../stateless/MenuBar';
 import TaskList from '../TaskList/TaskListView';
-import CompleteTask from '../CompleteTask/CompleteTaskView';
+import CompletedTaskList from '../CompleteTask/CompleteTaskView';
 
 export default class TaskScene extends React.Component {
+  getView(targetView) {
+    var view;
+    if (targetView === 'CompletedTaskList') {
+      view = (
+        <CompletedTaskList />
+      );
+    } else if (targetView === 'TaskList') {
+      view = (
+        <TaskList />
+      );
+    } else {
+      view = (
+        <TaskList />
+      );
+    }
+    return view;
+  }
   render() {
+    var view = this.getView(this.props.targetView);
     return (
       <DrawerLayoutAndroid
-        drawerWidth={300}
+        drawerWidth={200}
         drawerPosition={DrawerLayoutAndroid.positions.Right}
-        renderNavigationView={() => <MenuBar />}>
-        <TaskList />
-        {/* Temp placed here*/}
+        renderNavigationView={() => <MenuBar onPushRoute={this.props.onPushRoute} />}>
+        {view}
       </DrawerLayoutAndroid>
-    )
+    );
   }
 }
