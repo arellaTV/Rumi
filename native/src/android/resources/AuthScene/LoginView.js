@@ -24,8 +24,9 @@ export default class LoginView extends React.Component {
   onSubmit() {
     login(this.inputs).then(res => {
       if (res === true) {
-        this.props.loginSuccess();
-        this.props.onSceneChange({targetView: 'TaskView'});
+        this.props.loginSuccess().then(() => {
+          this.props.onSceneChange({targetView: 'TaskView'});
+        });
       } else {
         // display some error form
       }

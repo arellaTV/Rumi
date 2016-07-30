@@ -5,7 +5,7 @@ import {
   Text,
   View
 } from 'react-native';
-import socket from '../../socketClient';
+import { getSocket } from '../../socketClient';
 import Task from '../TaskList/TaskItem'
 
 const styles = StyleSheet.create({
@@ -34,6 +34,7 @@ class CompleteTask extends Component {
   constructor(props) {
     super(props);
     this.ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+    this.socket = getSocket();
     this.state = {
       completedTasks: [
         {"id": 1, "name": "Do Dishes", "due": "Tomorrow"},
@@ -43,11 +44,11 @@ class CompleteTask extends Component {
   }
 
   componentWillMount() {
-    socket.emit('get all tasks');
+    this.socket.emit('get all tasks');
   }
 
   componentDidMount() {
-    socket.on('complete task', (data) => {
+    this.socket.on('complete task', (data) => {
       this.setState({
         completedTasks: data
       });

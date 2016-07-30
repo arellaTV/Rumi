@@ -1,5 +1,6 @@
 let http = require('http');
 let socketIo = require('socket.io');
+let auth = require('./auth');
 let Task = require('./models/Task');
 let User = require('./models/User');
 let Completed = require('./models/Completed');
@@ -16,30 +17,29 @@ let Completed = require('./models/Completed');
 function decorate(app, session) {
   let server = http.Server(app);
   let io = socketIo(server);
-  // io.use((socket, next) => {
-  //   session(socket.request, socket.request.res, next);
-  // });
+  
   io.on('connection', socket => {
-    // if (!socket.request.session.passport) {
-    //   return socket.emit('rumi error', {message: 'Please reauthenticate'});
-    // }
-    console.log('connected');
-    socket.on('message', function(data) {
-      console.log(data);
-    });
-    socket.on('create task', createTask);
-    // socket.on('read task', readTask);
-    socket.on('update task', updateTask);
-    socket.on('archive task', archiveTask);
-    socket.on('unarchive task', notYetImplemented.bind(null, 'unarchive task'));
-    // socket.on('complete task', completeTask(socket.request.session.passport.user));
+    auth.verifyToken(socket.request.headers.authorization)
+      .then(token => {
+        return getUserFromToken(token);
+      })
+      .then((user) => {
+        socket.on('create task', createTask);
+        socket.on('update task', updateTask);
+        socket.on('archive task', archiveTask);
+        socket.on('unarchive task', notYetImplemented.bind(null, 'unarchive task'));
+        socket.on('complete task', completeTask(user.id));
 
-    socket.on('get all tasks', getAllTasks(socket));
-    socket.on('get completeds', getCompleteds(socket));
+        socket.on('get all tasks', getAllTasks(socket));
+        socket.on('get completeds', getCompleteds(socket));
 
-    socket.on('disconnect', () => {
-      console.log('disconnected');
-    });
+        socket.on('disconnect', () => {
+          console.log('disconnected');
+        });
+      })
+      .catch(() => {
+        return socket.emit('rumi error', {message: 'Please reauthenticate'});
+      });
   });
   return server;
 
@@ -86,7 +86,7 @@ function decorate(app, session) {
    * connected clients
    * @param  {object} id ID of a Task
    */
-  function completeTask(userId) {
+  function completeTask(token) {
     return id => {
       return Task.findById(id).then(task => task.complete(userId)).then(completed => {
         completed.reload({ include: [ User, Task ] }).then(completed => {

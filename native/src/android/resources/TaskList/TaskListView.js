@@ -6,12 +6,15 @@ import {
   View
 } from 'react-native';
 import styles from '../../assets/styles.js';
-import socket from '../../socketClient';
-import Task from './TaskItem'; 
+import { getSocket } from '../../socketClient';
+import getToken from '../AuthScene/Auth';
+import Task from './TaskItem';
+
 
 class TaskListView extends Component {
   constructor(props) {
     super(props);
+    this.socket = getSocket();
     this.ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
       dataSource: this.ds.cloneWithRows([
@@ -26,11 +29,11 @@ class TaskListView extends Component {
   }
 
   componentWillMount() {
-    socket.emit('get all tasks');
+    this.socket.emit('get all tasks');
   }
 
   componentDidMount() {
-    socket.on('sending all tasks', (data) => {
+    this.socket.on('sending all tasks', (data) => {
       var sortedTasks = this.prioritizeTasks(data);
       this.setState({
         dataSource: this.ds.cloneWithRows(data),
@@ -84,7 +87,7 @@ class TaskListView extends Component {
               }
               return (
                 <View >
-                  <Text style={styles.categoryName}> {categoryName} </Text> 
+                  <Text style={styles.categoryName}> {categoryName} </Text>
                     {category.map((task, index) =>
                       <Task task={task} onDismissal={this.onDismissal.bind(this, index, row)} key={index}/>
                     )}

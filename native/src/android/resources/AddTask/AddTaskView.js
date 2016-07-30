@@ -9,14 +9,14 @@ import {
   TouchableNativeFeedback,
   TouchableHighlight,
   Image } from 'react-native';
-
-import socket from '../../socketClient';
 import styles from '../../assets/styles.js';
+import { getSocket } from '../../socketClient';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 class AddTask extends Component {
   constructor(props) {
     super(props);
+    this.socket = getSocket();
     this.state = {
       interval: '0',
       recurranceVal: 0,
@@ -50,9 +50,7 @@ class AddTask extends Component {
 
   onSubmit() {
     this.calcDueDateAndInterval();
-    // insert socket emit logic here
-
-    socket.emit('create task', {
+    this.socket.emit('create task', {
       name: this.state.name,
       dueBy: this.state.duedate,
       interval: this.state.taskInterval
@@ -83,9 +81,9 @@ class AddTask extends Component {
               }}>
                 <Text style={styles.hideModal}> Cancel </Text>
               </TouchableHighlight>
-              
+
               <Text style={styles.newTaskTitle}>New Task</Text>
-              
+
               <TouchableNativeFeedback onPress={this.onSubmit.bind(this)}>
                 <View>
                   <Text style={styles.submitTask}>Save</Text>
@@ -97,7 +95,7 @@ class AddTask extends Component {
 
 
             </View>
-           
+
             <View style={styles.modal}>
               <Text style={styles.title}>Name:</Text>
                 <TextInput
