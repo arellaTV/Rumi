@@ -1,40 +1,37 @@
 module.exports = require('react-native').StyleSheet.create({
     "footer": {
         "alignItems": "center",
-        "backgroundColor": "#303030",
-        "flex": 0.2
+        "backgroundColor": "#383838",
+        "flex": 0.15
     },
-    "showModal": {
+    "showModalAccent": {
         "width": 65,
-        "height": 100,
-        "backgroundColor": "#28BF32",
+        "height": 65,
+        "backgroundColor": "#7AD05D",
         "alignItems": "center",
-        "paddingTop": 10
+        "paddingTop": 5
     },
     "modal": {
-        "backgroundColor": "#303030",
-        "alignItems": "stretch",
-        "justifyContent": "flex-start",
-        "paddingBottom": 250,
+        "backgroundColor": "#383838",
         "flex": 1
     },
     "modalHeader": {
         "alignItems": "center",
-        "backgroundColor": "#303030",
+        "backgroundColor": "#383838",
         "flexDirection": "row",
         "justifyContent": "space-around"
     },
     "hideModal": {
         "fontFamily": "Roboto",
         "fontSize": 20,
-        "backgroundColor": "#303030",
-        "color": "#28BF32"
+        "backgroundColor": "#383838",
+        "color": "#7AD05D"
     },
     "submitTask": {
         "fontFamily": "Roboto",
         "fontSize": 20,
-        "backgroundColor": "#303030",
-        "color": "#28BF32"
+        "backgroundColor": "#383838",
+        "color": "#7AD05D"
     },
     "newTaskTitle": {
         "fontFamily": "Roboto",
@@ -79,8 +76,9 @@ module.exports = require('react-native').StyleSheet.create({
     "categoryName": {
         "fontFamily": "Roboto",
         "fontSize": 24,
-        "backgroundColor": "#28BF32",
-        "color": "#EAEAEA",
+        "backgroundColor": "#7AD05D",
+        "color": "#fff",
+        "fontWeight": "bold",
         "alignItems": "center"
     },
     "taskCard": {
@@ -111,5 +109,52 @@ module.exports = require('react-native').StyleSheet.create({
     "baseText": {
         "fontFamily": "Roboto",
         "fontSize": 20
+    },
+    "login": {
+        "backgroundColor": "#fff",
+        "flex": 2,
+        "justifyContent": "center",
+        "alignItems": "center"
+    },
+    "loginInput": {
+        "height": 40,
+        "backgroundColor": "#EAEAEA",
+        "width": 375,
+        "marginBottom": 20
+    },
+    "loginButton": {
+        "alignItems": "center",
+        "width": 375,
+        "height": 40,
+        "backgroundColor": "#7AD05D",
+        "marginBottom": 15
+    },
+    "loginText": {
+        "fontFamily": "Roboto",
+        "fontSize": 20,
+        "color": "#fff",
+        "marginTop": 5
+    },
+    "menu": {
+        "backgroundColor": "#383838",
+        "justifyContent": "flex-start",
+        "alignItems": "flex-start",
+        "flex": 1
+    },
+    "indivMenu": {
+        "flexDirection": "row",
+        "justifyContent": "flex-start",
+        "alignItems": "center",
+        "borderBottomColor": "#7AD05D",
+        "paddingTop": 10,
+        "paddingBottom": 15,
+        "paddingRight": 10,
+        "paddingLeft": 10
+    },
+    "menuText": {
+        "fontFamily": "Roboto",
+        "fontSize": 24,
+        "marginLeft": 5,
+        "color": "#EAEAEA"
     }
 });

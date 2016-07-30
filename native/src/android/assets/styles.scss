@@ -1,6 +1,6 @@
 $primaryColor: #EAEAEA; 
-$secondaryColor: #303030; 
-$accentColor: #28BF32; 
+$secondaryColor: #383838; 
+$accentColor: #7AD05D; 
 $font: Roboto;
 
 @mixin center-children {
@@ -33,22 +33,19 @@ $font: Roboto;
 footer {
   @include center-children;
   background-color: $secondaryColor;
-  flex: 0.2;
+  flex: 0.15;
 }
 
-.showModal {
+.showModalAccent {
   width: 65;
-  height: 100;
+  height: 65;
   background-color: $accentColor;
   align-items: center;
-  padding-top: 10;
+  padding-top: 5;
 }
 
 .modal {
   background-color: $secondaryColor;
-  align-items: stretch;
-  justify-content: flex-start;
-  padding-bottom: 250;
   flex: 1;
   &Header {
     @include center-children;
@@ -108,7 +105,8 @@ input {
 .categoryName {
   @include h2;
   background-color: $accentColor;
-  color: $primaryColor;
+  color: #fff;
+  font-weight: bold;
   align-items: center;
 }
 
@@ -138,6 +136,60 @@ input {
 
 .baseText {
   @include p;
+}
+
+// Login and Register View
+
+.login {
+  background-color: #fff;
+  flex: 2;
+  justify-content: center;
+  align-items: center;
+}
+
+.loginInput {
+  height: 40;
+  background-color: $primaryColor;
+  width: 375;
+  margin-bottom: 20;
+}
+
+.loginButton {
+  @include center-children;
+  width: 375;
+  height: 40;
+  background-color: $accentColor;
+  margin-bottom: 15;
+}
+
+.loginText {
+  @include p;
+  color: #fff;
+  margin-top: 5;
+}
+
+// Menu Bar
+
+.menu {
+  background-color: $secondaryColor;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex: 1
+}
+
+.indivMenu {
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  border-bottom-color: $accentColor;
+  padding: 10;
+  padding-bottom: 15;
+}
+
+.menuText {
+  @include h2;
+  margin-left: 5;
+  color: $primaryColor; 
 }
 
 

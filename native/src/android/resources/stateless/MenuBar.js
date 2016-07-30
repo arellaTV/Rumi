@@ -5,55 +5,33 @@ import {
   Text,
   TouchableNativeFeedback
 } from 'react-native';
+import styles from '../../assets/styles.js';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
-const styles = StyleSheet.create({
-  taskList: {
-    backgroundColor: '#EAEAEA',
-    flex: 2,
-    alignItems: 'stretch',
-  },
-  taskCard: {
-    backgroundColor: '#fff',
-    flex: 2,
-    justifyContent: 'space-around',
-  },
-  titleText: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    textAlign: 'center',
-  },
-  baseText: {
-    fontSize: 20,
-  },
-});
 export default (props) => {
   return (
-    <View>
+    <View style={styles.menu}>
       {/** Refactor these into menuItems **/}
-      <TouchableNativeFeedback
-        onPress={props.onPushRoute.bind(null, {targetView: 'TaskList'})}
-        style={styles.taskCard}
-        background={TouchableNativeFeedback.SelectableBackground()}>
-        <View>
-          <Text>Open Tasks</Text>
-        </View>
-      </TouchableNativeFeedback>
-      <TouchableNativeFeedback
-        onPress={props.onPushRoute.bind(null, {targetView: 'CompletedTaskList'})}
-        style={styles.taskCard}
-        background={TouchableNativeFeedback.SelectableBackground()}>
-        <View>
-          <Text>Closed Tasks</Text>
-        </View>
-      </TouchableNativeFeedback>
+      <View>
+        <TouchableNativeFeedback
+          onPress={props.onPushRoute.bind(null, {targetView: 'TaskList'})}
+          background={TouchableNativeFeedback.SelectableBackground()}>
+          <View style={styles.indivMenu}>
+            <Icon name="square-o" size={40} color="#7AD05D" />
+            <Text style={styles.menuText}>Open Tasks</Text>
+          </View>
+        </TouchableNativeFeedback>
+      </View>
+      <View>
+        <TouchableNativeFeedback
+          onPress={props.onPushRoute.bind(null, {targetView: 'CompletedTaskList'})}
+          background={TouchableNativeFeedback.SelectableBackground()}>
+          <View style={styles.indivMenu}>
+            <Icon name="check-square-o" size={40} color="#7AD05D" />
+            <Text style={styles.menuText}>Closed Tasks</Text>
+          </View>
+        </TouchableNativeFeedback>
+    </View>
     </View>
   );
 }
-
-// export default class NavigationView extends React.Component {
-//   render() {
-//     return (
-//
-//     );
-//   }
-// };

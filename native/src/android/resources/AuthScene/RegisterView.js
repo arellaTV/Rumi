@@ -1,11 +1,13 @@
 import React from 'react';
 import {
+  Image,
   Text,
   TextInput,
   TouchableNativeFeedback,
   View
 } from 'react-native';
 import { register } from './Auth';
+import styles from '../../assets/styles.js';
 
 export default class RegisterView extends React.Component {
   constructor(props, context) {
@@ -25,26 +27,34 @@ export default class RegisterView extends React.Component {
       }
     });
   }
+  onLoginClick() {
+    this.props.onPushRoute({targetView: 'LoginView'});
+  }
   render() {
     return (
-      <View>
-        <Text>Name:</Text>
+      <View style={styles.login}>
+        <Image source={require('../../assets/img/android-to-ios.png')} />
+        <Image source={require('../../assets/img/rumi.png')} />
         <TextInput
-          onChangeText={this.onChange.bind(this, 'name')} />
-        <Text>Email:</Text>
+          onChangeText={this.onChange.bind(this, 'name')}
+          placeholder="full name"
+          style={styles.loginInput} />
         <TextInput
-          onChangeText={this.onChange.bind(this, 'email')} />
-        <Text>Password:</Text>
+          onChangeText={this.onChange.bind(this, 'email')} 
+          placeholder="email address"
+          style={styles.loginInput} />
         <TextInput
-          onChangeText={this.onChange.bind(this, 'password')} />
+          onChangeText={this.onChange.bind(this, 'password')} 
+          placeholder="password"
+          style={styles.loginInput}/>
         <TouchableNativeFeedback onPress={this.onSubmit.bind(this)}>
-          <View style={{width: 50, height: 25, backgroundColor: 'grey'}}>
-            <Text>Register</Text>
+          <View style={styles.loginButton}>
+            <Text style={styles.loginText}>CREATE YOUR ACCOUNT</Text>
           </View>
         </TouchableNativeFeedback>
-        <TouchableNativeFeedback>
-          <View style={{width: 50, height: 25, backgroundColor: 'grey'}}>
-            <Text>Login with existing account</Text>
+        <TouchableNativeFeedback onPress={this.onLoginClick.bind(this)}>
+          <View style={styles.p}>
+            <Text>sign in with an existing account</Text>
           </View>
         </TouchableNativeFeedback>
       </View>

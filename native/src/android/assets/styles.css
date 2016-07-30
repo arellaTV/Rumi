@@ -1,34 +1,31 @@
 footer {
   display: flex;
   align-items: center;
-  background-color: #303030;
-  flex: 0.2; }
+  background-color: #383838;
+  flex: 0.15; }
 
-.showModal {
+.showModalAccent {
   width: 65;
-  height: 100;
-  background-color: #28BF32;
+  height: 65;
+  background-color: #7AD05D;
   align-items: center;
-  padding-top: 10; }
+  padding-top: 5; }
 
 .modal {
-  background-color: #303030;
-  align-items: stretch;
-  justify-content: flex-start;
-  padding-bottom: 250;
+  background-color: #383838;
   flex: 1; }
   .modalHeader {
     display: flex;
     align-items: center;
-    background-color: #303030;
+    background-color: #383838;
     flex-direction: row;
     justify-content: space-around; }
 
 .hideModal, .submitTask {
   font-family: Roboto;
   font-size: 20;
-  background-color: #303030;
-  color: #28BF32; }
+  background-color: #383838;
+  color: #7AD05D; }
 
 .newTaskTitle {
   font-family: Roboto;
@@ -68,8 +65,9 @@ input {
 .categoryName {
   font-family: Roboto;
   font-size: 24;
-  background-color: #28BF32;
-  color: #EAEAEA;
+  background-color: #7AD05D;
+  color: #fff;
+  font-weight: bold;
   align-items: center; }
 
 .taskCard {
@@ -97,3 +95,49 @@ input {
 .baseText {
   font-family: Roboto;
   font-size: 20; }
+
+.login {
+  background-color: #fff;
+  flex: 2;
+  justify-content: center;
+  align-items: center; }
+
+.loginInput {
+  height: 40;
+  background-color: #EAEAEA;
+  width: 375;
+  margin-bottom: 20; }
+
+.loginButton {
+  display: flex;
+  align-items: center;
+  width: 375;
+  height: 40;
+  background-color: #7AD05D;
+  margin-bottom: 15; }
+
+.loginText {
+  font-family: Roboto;
+  font-size: 20;
+  color: #fff;
+  margin-top: 5; }
+
+.menu {
+  background-color: #383838;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex: 1; }
+
+.indivMenu {
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  border-bottom-color: #7AD05D;
+  padding: 10;
+  padding-bottom: 15; }
+
+.menuText {
+  font-family: Roboto;
+  font-size: 24;
+  margin-left: 5;
+  color: #EAEAEA; }
