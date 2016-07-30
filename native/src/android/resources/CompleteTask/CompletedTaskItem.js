@@ -9,11 +9,13 @@ import {
 } from 'react-native';
 import styles from '../../assets/styles.js';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import TimeAgo from 'react-native-timeago'
 
 class CompletedTask extends React.Component {
   render() {
     var props = this.props;
     var task = props.data.task;
+    var user = props.data.user;
     return (
       <View>
         <TouchableNativeFeedback
@@ -21,6 +23,8 @@ class CompletedTask extends React.Component {
           background={TouchableNativeFeedback.SelectableBackground()}>
           <View style={styles.taskCard}>
             <Text style={styles.titleText}> {task.name} </Text>
+            <Text style={styles.titleText}> <TimeAgo time={task.updatedAt} /> </Text>
+            <Text style={styles.titleText}> {user.name} </Text>
             <View style={styles.taskElements}>
               <TouchableHighlight onPress={this.onDismissal} >
                 <Icon name="check-square-o" size={40} color="#28BF32" />
