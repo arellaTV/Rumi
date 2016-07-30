@@ -30,7 +30,7 @@ export default class TaskScene extends React.Component {
       <DrawerLayoutAndroid
         drawerWidth={200}
         drawerPosition={DrawerLayoutAndroid.positions.Right}
-        renderNavigationView={() => <MenuBar onPushRoute={this.props.onPushRoute} />}>
+        renderNavigationView={() => <MenuBar onPushRoute={this.props.onPushRoute} activeView={this.props.targetView} />}>
         {view}
         <AddTask/>
       </DrawerLayoutAndroid>
