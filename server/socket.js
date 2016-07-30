@@ -36,14 +36,12 @@ function decorate(app, session) {
     //   return socket.emit('rumi error', {message: 'Please reauthenticate'});
     // }
     console.log('connected');
-    socket.on('message', function(data) {
-      console.log(data);
-    });
+
     socket.on('create task', createTask);
     // socket.on('read task', readTask);
     socket.on('update task', updateTask);
     socket.on('archive task', archiveTask);
-    socket.on('unarchive task', notYetImplemented.bind(null, 'unarchive task'));
+    // socket.on('unarchive task', notYetImplemented.bind(null, 'unarchive task'));
     socket.on('complete task', /*completeTask(1)*/ (taskId) => { console.log(taskId) } );
 >>>>>>> Connect completed socket
 
