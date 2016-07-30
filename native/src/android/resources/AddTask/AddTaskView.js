@@ -55,7 +55,7 @@ class AddTask extends Component {
       dueBy: this.state.duedate,
       interval: this.state.taskInterval
     });
-    socket.emit('get all tasks');
+    this.socket.emit('get all tasks');
   }
 
   render() {
