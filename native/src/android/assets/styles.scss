@@ -1,0 +1,143 @@
+$primaryColor: #EAEAEA; 
+$secondaryColor: #303030; 
+$accentColor: #28BF32; 
+$font: Roboto;
+
+@mixin center-children {
+  display: flex;
+  align-items: center;
+}
+
+@mixin offset-width {
+  width: 375;
+  margin-left: 20;
+}
+
+@mixin h1 {
+  font-family: $font;
+  font-size: 26;
+}
+
+@mixin h2 {
+  font-family: $font;
+  font-size: 24;
+}
+
+@mixin p {
+  font-family: $font;
+  font-size: 20;
+}
+
+// Add Task View
+
+footer {
+  @include center-children;
+  background-color: $secondaryColor;
+  flex: 0.2;
+}
+
+.showModal {
+  width: 65;
+  height: 100;
+  background-color: $accentColor;
+  align-items: center;
+  padding-top: 10;
+}
+
+.modal {
+  background-color: $secondaryColor;
+  align-items: stretch;
+  justify-content: flex-start;
+  padding-bottom: 250;
+  flex: 1;
+  &Header {
+    @include center-children;
+    background-color: $secondaryColor;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+}
+
+.hideModal {
+  @include p;
+  background-color: $secondaryColor;
+  color: $accentColor;
+}
+
+.submitTask {
+  @extend .hideModal;
+}
+
+.newTaskTitle {
+  @include h2;
+  margin: 10; 
+  color: $primaryColor;
+  text-align: center;
+}
+
+title {
+  @include h2;
+  color: $primaryColor;
+  margin: 20
+}
+
+input {
+  @include offset-width;
+  height: 40;
+  background-color: $primaryColor;
+}
+
+.recurrance {
+  @include center-children;
+  @include offset-width;
+  flex-direction: row;
+  justify-content: space-around;
+  background-color: $primaryColor;
+  height: 40;
+}
+
+// Task List View
+
+.taskList {
+  background-color: $primaryColor;
+  flex: 2;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.categoryName {
+  @include h2;
+  background-color: $accentColor;
+  color: $primaryColor;
+  align-items: center;
+}
+
+.taskCard {
+ @include offset-width;
+  background-color: #fff;
+  padding: 20;
+  margin-bottom: 10;
+}
+
+.taskElements {
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.taskText {
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.titleText {
+  @include h1;
+  text-align: center;
+  padding-bottom: 10
+}
+
+.baseText {
+  @include p;
+}
+
+

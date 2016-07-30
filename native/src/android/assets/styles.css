@@ -1,1 +1,99 @@
-$
+footer {
+  display: flex;
+  align-items: center;
+  background-color: #303030;
+  flex: 0.2; }
+
+.showModal {
+  width: 65;
+  height: 100;
+  background-color: #28BF32;
+  align-items: center;
+  padding-top: 10; }
+
+.modal {
+  background-color: #303030;
+  align-items: stretch;
+  justify-content: flex-start;
+  padding-bottom: 250;
+  flex: 1; }
+  .modalHeader {
+    display: flex;
+    align-items: center;
+    background-color: #303030;
+    flex-direction: row;
+    justify-content: space-around; }
+
+.hideModal, .submitTask {
+  font-family: Roboto;
+  font-size: 20;
+  background-color: #303030;
+  color: #28BF32; }
+
+.newTaskTitle {
+  font-family: Roboto;
+  font-size: 24;
+  margin: 10;
+  color: #EAEAEA;
+  text-align: center; }
+
+title {
+  font-family: Roboto;
+  font-size: 24;
+  color: #EAEAEA;
+  margin: 20; }
+
+input {
+  width: 375;
+  margin-left: 20;
+  height: 40;
+  background-color: #EAEAEA; }
+
+.recurrance {
+  display: flex;
+  align-items: center;
+  width: 375;
+  margin-left: 20;
+  flex-direction: row;
+  justify-content: space-around;
+  background-color: #EAEAEA;
+  height: 40; }
+
+.taskList {
+  background-color: #EAEAEA;
+  flex: 2;
+  flex-direction: column;
+  justify-content: space-around; }
+
+.categoryName {
+  font-family: Roboto;
+  font-size: 24;
+  background-color: #28BF32;
+  color: #EAEAEA;
+  align-items: center; }
+
+.taskCard {
+  width: 375;
+  margin-left: 20;
+  background-color: #fff;
+  padding: 20;
+  margin-bottom: 10; }
+
+.taskElements {
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end; }
+
+.taskText {
+  flex-direction: column;
+  justify-content: space-between; }
+
+.titleText {
+  font-family: Roboto;
+  font-size: 26;
+  text-align: center;
+  padding-bottom: 10; }
+
+.baseText {
+  font-family: Roboto;
+  font-size: 20; }

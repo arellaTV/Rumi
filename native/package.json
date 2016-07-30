@@ -3,7 +3,11 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node node_modules/react-native/local-cli/cli.js start"
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "watch:sass": "node-sass src/android/assets/styles.scss src/android/assets/styles.css -w",
+    "watch:css": "react-native-css -i src/android/assets/styles.css -o src/android/assets/styles.js --watch --pretty",
+    "watch:styles": "npm run watch:sass & npm run watch:css",
+    "watch": "react-native run-android & npm run watch:styles"
   },
   "dependencies": {
     "react": "15.2.1",
@@ -12,5 +16,8 @@
     "react-native-vector-icons": "^2.0.3",
     "react-native-fbsdk": "^0.3.0",
     "socket.io-client": "^1.4.8"
+  },
+  "devDependencies": {
+    "node-sass": "^3.8.0"
   }
 }

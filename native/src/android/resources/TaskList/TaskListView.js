@@ -5,30 +5,9 @@ import {
   Text,
   View
 } from 'react-native';
+import styles from '../../assets/styles.js';
 import socket from '../../socketClient';
-import Task from './TaskItem'
-
-const styles = StyleSheet.create({
-  taskList: {
-    backgroundColor: '#EAEAEA',
-    flex: 2,
-    alignItems: 'stretch',
-  },
-  taskCard: {
-    backgroundColor: '#fff',
-    flex: 2,
-    justifyContent: 'space-around',
-  },
-  titleText: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    textAlign: 'center',
-  },
-  baseText: {
-    fontSize: 20,
-  },
-});
-
+import Task from './TaskItem'; 
 
 class TaskListView extends Component {
   constructor(props) {
@@ -101,14 +80,14 @@ class TaskListView extends Component {
           renderRow={
             (category, section, row) => {
               if (category.length) {
-                var categoryName = <Text>{categoryNames[row]}</Text>;
+                var categoryName = <Text style={styles.categoryName}>{categoryNames[row]}</Text>;
               }
               return (
-                <View>
-                  {categoryName}
-                  {category.map((task, index) =>
-                    <Task task={task} onDismissal={this.onDismissal.bind(this, index, row)} key={index}/>
-                  )}
+                <View >
+                  <Text style={styles.categoryName}> {categoryName} </Text> 
+                    {category.map((task, index) =>
+                      <Task task={task} onDismissal={this.onDismissal.bind(this, index, row)} key={index}/>
+                    )}
                 </View>
               );
             }

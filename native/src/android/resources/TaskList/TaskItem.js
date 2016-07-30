@@ -8,27 +8,9 @@ import {
   View
 } from 'react-native';
 import socket from '../../socketClient';
+import styles from '../../assets/styles.js';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
-const styles = StyleSheet.create({
-  taskList: {
-    backgroundColor: '#EAEAEA',
-    flex: 2,
-    alignItems: 'stretch',
-  },
-  taskCard: {
-    backgroundColor: '#fff',
-    flex: 2,
-    justifyContent: 'space-around',
-  },
-  titleText: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    textAlign: 'center',
-  },
-  baseText: {
-    fontSize: 20,
-  },
-});
 
 const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 
@@ -39,13 +21,19 @@ const Task = (props) => (
       background={TouchableNativeFeedback.SelectableBackground()}>
       <View style={styles.taskCard}>
         <Text style={styles.titleText}> {props.task.name} </Text>
-        <Text style={styles.baseText}> Due: {props.task.dueBy} </Text>
-        <Text style={styles.baseText}> Last completed by NAME </Text>
+        <View style={styles.taskElements}>
+          <View style={styles.taskText}>
+            <Text style={styles.baseText}> Due: {props.task.dueBy} </Text>
+            
+            <Text style={styles.baseText}> Last completed by NAME </Text>
+          </View>
+          <TouchableHighlight onPress={props.onDismissal} >
+            <Icon name="square-o" size={40} color="#28BF32" />
+          </TouchableHighlight>
+        </View>
       </View>
     </TouchableNativeFeedback>
-    <TouchableHighlight onPress={props.onDismissal}>
-      <Text>dismiss</Text>
-    </TouchableHighlight>
+    
   </View>
 )
 
