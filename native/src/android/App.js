@@ -90,7 +90,7 @@ class App extends Component {
   _onNavigationChange(type, route) {
     let {navigationState} = this.state;
     var route = route || {};
-    route.key = 'Route at: ' + Date.now();
+    route.key = 'Route at: ' + Math.floor(Math.random() * 100000);
     switch(type) {
       case 'push':
         navigationState = StateUtils.push(navigationState, route);
