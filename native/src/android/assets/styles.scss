@@ -1,6 +1,6 @@
 $primaryColor: #EAEAEA; 
-$secondaryColor: #303030; 
-$accentColor: #28BF32; 
+$secondaryColor: #383838; 
+$accentColor: #7AD05D; 
 $font: Roboto;
 
 @mixin center-children {
@@ -139,5 +139,36 @@ input {
 .baseText {
   @include p;
 }
+
+// Login View
+
+.login {
+  background-color: #fff;
+  flex: 2;
+  justify-content: center;
+  align-items: center;
+}
+
+.loginInput {
+  height: 40;
+  background-color: $primaryColor;
+  width: 375;
+  margin-bottom: 20;
+}
+
+.loginButton {
+  @include center-children;
+  width: 375;
+  height: 40;
+  background-color: $accentColor;
+  margin-bottom: 15;
+}
+
+.loginText {
+  @include p;
+  color: #fff;
+  margin-top: 5;
+}
+
 
 

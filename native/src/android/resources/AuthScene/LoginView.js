@@ -7,6 +7,7 @@ import {
   TouchableNativeFeedback,
   View
 } from 'react-native';
+import styles from '../../assets/styles.js';
 
 import { login, getToken } from './Auth';
 
@@ -38,27 +39,25 @@ export default class LoginView extends React.Component {
   }
   render() {
     return (
-      <View>
-        <Image
-          source={require('../../assets/img/android-to-ios.png')}
-        />
-        <Image
-          source={require('../../assets/img/rumi.png')}
-        />
+      <View style={styles.login}>
+        <Image source={require('../../assets/img/android-to-ios.png')} />
+        <Image source={require('../../assets/img/rumi.png')} />
         <TextInput
           onChangeText={this.onChange.bind(this, 'email')}
-          placeholder="email address"/>
+          placeholder="email address"
+          style={styles.loginInput}/>
         <TextInput
           onChangeText={this.onChange.bind(this, 'password')} 
-          placeholder="password"/>
+          placeholder="password"
+          style={styles.loginInput}/>
         <TouchableNativeFeedback onPress={this.onSubmit.bind(this)}>
-          <View style={{width: 50, height: 25, backgroundColor: 'grey'}}>
-            <Text>Login</Text>
+          <View style={styles.loginButton}>
+            <Text style={styles.loginText}> SIGN IN </Text>
           </View>
         </TouchableNativeFeedback>
         <TouchableNativeFeedback onPress={this.onRegisterClick.bind(this)}>
-          <View style={{width: 50, height: 25, backgroundColor: 'grey'}}>
-            <Text>Register</Text>
+          <View>
+            <Text style={styles.p}>or create an account</Text>
           </View>
         </TouchableNativeFeedback>
       </View>

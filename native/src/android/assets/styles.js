@@ -1,18 +1,18 @@
 module.exports = require('react-native').StyleSheet.create({
     "footer": {
         "alignItems": "center",
-        "backgroundColor": "#303030",
+        "backgroundColor": "#383838",
         "flex": 0.2
     },
     "showModal": {
         "width": 65,
         "height": 100,
-        "backgroundColor": "#28BF32",
+        "backgroundColor": "#7AD05D",
         "alignItems": "center",
         "paddingTop": 10
     },
     "modal": {
-        "backgroundColor": "#303030",
+        "backgroundColor": "#383838",
         "alignItems": "stretch",
         "justifyContent": "flex-start",
         "paddingBottom": 250,
@@ -20,21 +20,21 @@ module.exports = require('react-native').StyleSheet.create({
     },
     "modalHeader": {
         "alignItems": "center",
-        "backgroundColor": "#303030",
+        "backgroundColor": "#383838",
         "flexDirection": "row",
         "justifyContent": "space-around"
     },
     "hideModal": {
         "fontFamily": "Roboto",
         "fontSize": 20,
-        "backgroundColor": "#303030",
-        "color": "#28BF32"
+        "backgroundColor": "#383838",
+        "color": "#7AD05D"
     },
     "submitTask": {
         "fontFamily": "Roboto",
         "fontSize": 20,
-        "backgroundColor": "#303030",
-        "color": "#28BF32"
+        "backgroundColor": "#383838",
+        "color": "#7AD05D"
     },
     "newTaskTitle": {
         "fontFamily": "Roboto",
@@ -79,7 +79,7 @@ module.exports = require('react-native').StyleSheet.create({
     "categoryName": {
         "fontFamily": "Roboto",
         "fontSize": 24,
-        "backgroundColor": "#28BF32",
+        "backgroundColor": "#7AD05D",
         "color": "#EAEAEA",
         "alignItems": "center"
     },
@@ -111,5 +111,30 @@ module.exports = require('react-native').StyleSheet.create({
     "baseText": {
         "fontFamily": "Roboto",
         "fontSize": 20
+    },
+    "login": {
+        "backgroundColor": "#fff",
+        "flex": 2,
+        "justifyContent": "center",
+        "alignItems": "center"
+    },
+    "loginInput": {
+        "height": 40,
+        "backgroundColor": "#EAEAEA",
+        "width": 375,
+        "marginBottom": 20
+    },
+    "loginButton": {
+        "alignItems": "center",
+        "width": 375,
+        "height": 40,
+        "backgroundColor": "#7AD05D",
+        "marginBottom": 15
+    },
+    "loginText": {
+        "fontFamily": "Roboto",
+        "fontSize": 20,
+        "color": "#fff",
+        "marginTop": 5
     }
 });
