@@ -94,7 +94,7 @@ module.exports = require('react-native').StyleSheet.create({
     "taskElements": {
         "flexDirection": "row",
         "justifyContent": "space-between",
-        "alignItems": "flex-end"
+        "alignItems": "center"
     },
     "taskText": {
         "flexDirection": "column",
