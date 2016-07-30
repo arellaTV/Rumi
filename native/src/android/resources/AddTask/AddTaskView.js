@@ -35,9 +35,9 @@ class AddTask extends Component {
     let n = Number(this.state.interval);
 
     // 1 = hours; 2 = days
-    if (this.state.intervalVal === 1) {
+    if (this.state.recurranceVal == '0') {
       this.state.taskInterval = hours(n);
-    } else if (this.state.intervalVal === 2) {
+    } else if (this.state.recurranceVal == '1') {
       this.state.taskInterval = days(n);
     }
 
@@ -111,8 +111,8 @@ class AddTask extends Component {
                   style={{width: 100}}
                   selectedValue={this.state.recurranceVal}
                   onValueChange={(val) => this.setState({recurranceVal: val})}>
-                  <Picker.Item label='hour(s)' value={0} />
-                  <Picker.Item label='day(s)' value={1} />
+                  <Picker.Item label='hour(s)' value='0' />
+                  <Picker.Item label='day(s)' value='1' />
                 </Picker>
               </View>
 
