@@ -4,18 +4,15 @@ module.exports = require('react-native').StyleSheet.create({
         "backgroundColor": "#383838",
         "flex": 0.15
     },
-    "showModal": {
+    "showModalAccent": {
         "width": 65,
-        "height": 100,
+        "height": 65,
         "backgroundColor": "#7AD05D",
         "alignItems": "center",
-        "paddingTop": 10
+        "paddingTop": 5
     },
     "modal": {
         "backgroundColor": "#383838",
-        "alignItems": "stretch",
-        "justifyContent": "flex-start",
-        "paddingBottom": 250,
         "flex": 1
     },
     "modalHeader": {
@@ -80,7 +77,8 @@ module.exports = require('react-native').StyleSheet.create({
         "fontFamily": "Roboto",
         "fontSize": 24,
         "backgroundColor": "#7AD05D",
-        "color": "#EAEAEA",
+        "color": "#fff",
+        "fontWeight": "bold",
         "alignItems": "center"
     },
     "taskCard": {
@@ -136,5 +134,27 @@ module.exports = require('react-native').StyleSheet.create({
         "fontSize": 20,
         "color": "#fff",
         "marginTop": 5
+    },
+    "menu": {
+        "backgroundColor": "#383838",
+        "justifyContent": "flex-start",
+        "alignItems": "flex-start",
+        "flex": 1
+    },
+    "indivMenu": {
+        "flexDirection": "row",
+        "justifyContent": "flex-start",
+        "alignItems": "center",
+        "borderBottomColor": "#7AD05D",
+        "paddingTop": 10,
+        "paddingBottom": 15,
+        "paddingRight": 10,
+        "paddingLeft": 10
+    },
+    "menuText": {
+        "fontFamily": "Roboto",
+        "fontSize": 24,
+        "marginLeft": 5,
+        "color": "#EAEAEA"
     }
 });
