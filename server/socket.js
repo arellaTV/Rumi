@@ -30,7 +30,6 @@ function decorate(app, session) {
         socket.on('archive task', archiveTask);
         socket.on('unarchive task', notYetImplemented.bind(null, 'unarchive task'));
         socket.on('complete task', completeTask(user.dataValues.id));
-
         socket.on('get all tasks', getAllTasks(socket));
         socket.on('get completeds', getCompleteds(socket));
 
