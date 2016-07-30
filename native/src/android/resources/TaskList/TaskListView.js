@@ -67,6 +67,7 @@ class TaskListView extends Component {
     this.socket.emit('complete task', id);
     this.socket.emit('archive task', id);
     this.socket.emit('get all tasks');
+    this.socket.emit('get completeds');
     // this.setState({
     //   currentCategory: currentCategory
     // })

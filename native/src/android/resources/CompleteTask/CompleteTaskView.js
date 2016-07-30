@@ -14,33 +14,17 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 class CompleteTask extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      completedTasks: []
+    };
     this.ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.socket = getSocket();
-    this.state = {
-      completedTasks: [
-        {"id": 1, "name": "Do Dishes", "due": "Tomorrow"},
-        {"id": 2, "name": "Wash Laundry", "due": "Friday"}
-      ]
-    };
-  }
-
-  componentWillMount() {
-    this.socket.emit('get all tasks');
-  }
-
-  componentDidMount() {
-    this.socket.on('complete task', (data) => {
+    this.socket.emit('get completeds');
+    this.socket.on('sending completeds', (data) => {
       this.setState({
         completedTasks: data
       });
     });
-  }
-
-  onDismissal(index) {
-    this.state.completedTasks.splice(index, 1);
-    this.setState({
-      completedTasks: this.state.completedTasks
-    })
   }
 
   render() {
@@ -54,7 +38,7 @@ class CompleteTask extends Component {
               return (
                 <View>
                   <Text>Completed Tasks</Text>
-                  <Task task={task} onDismissal={this.onDismissal.bind(this, index)}/>
+                  <Task task={task} />
                 </View>
               );
             }
