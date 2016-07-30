@@ -86,7 +86,7 @@ class TaskListView extends Component {
               }
               return (
                 <View >
-                  <Text style={styles.categoryName}> {categoryName} </Text> 
+                  <Text style={styles.categoryName}> {categoryName} </Text>
                     {category.map((task, index) =>
                       <Task task={task} onDismissal={this.onDismissal.bind(this, index, row)} key={index}/>
                     )}

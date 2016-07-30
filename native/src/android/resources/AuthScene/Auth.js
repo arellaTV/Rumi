@@ -18,7 +18,6 @@ var login = function(userInfo) {
   }).then((res) => {
     return res.json();
   }).then(token => {
-    console.log(token);
     return AsyncStorage.setItem('@Rumi:token', token);
   }).then(() => {
     return true;

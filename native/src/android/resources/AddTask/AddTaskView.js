@@ -58,7 +58,6 @@ class AddTask extends Component {
       interval: this.state.taskInterval
     });
     socket.emit('get all tasks');
-    console.log('getting to line 126 in AddTaskView');
   }
 
   render() {
@@ -85,7 +84,7 @@ class AddTask extends Component {
               }}>
                 <Text style={styles.hideModal}> Cancel </Text>
               </TouchableHighlight>
-              <Text style={styles.newTaskTitle}>New Task</Text>
+              <Text style={styles.newTask}>New Task</Text>
               <TouchableNativeFeedback onPress={() => {
                   this.onSubmit.apply(this);
                   this.setModalVisible(!this.state.modalVisible);
