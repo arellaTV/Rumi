@@ -29,7 +29,7 @@ class CompleteTask extends Component {
   render() {
     return (
       <View style={styles.taskList}>
-        <Text>Completed Tasks</Text>
+        <Text style={styles.categoryName}> Completed Tasks</Text>
         <ListView
           dataSource={this.ds.cloneWithRows(this.state.completedTasks)}
           enableEmptySections={true}
@@ -37,7 +37,7 @@ class CompleteTask extends Component {
             (data, section, index) => {
               if (data.task) {
                 return (
-                  <View>
+                  <View >
                   <CompletedTask data={data} />
                   </View>
                 );

@@ -80,20 +80,29 @@ class TaskListView extends Component {
       <View style={styles.taskList}>
         <ListView
           dataSource={this.ds.cloneWithRows(tasks)}
-          enableEmptySections={true}
+          enableEmptySections={false}
           renderRow={
             (category, section, row) => {
+              // if (category.length) {
+              //   var categoryName = <Text style={styles.categoryName}>{categoryNames[row]}</Text>;
+              // }
               if (category.length) {
-                var categoryName = <Text style={styles.categoryName}>{categoryNames[row]}</Text>;
+                return (
+                  <View >
+                    <Text style={styles.categoryName}> {categoryNames[row]} </Text>
+                    <View>
+                      {category.filter(task => !task.isArchived).map((task, index) =>
+                        <Task task={task} onDismissal={this.onDismissal.bind(this, task.id)} key={task.id}/>
+                      )}
+                    </View>
+                  </View>
+                );
+              } else {
+                return ( 
+                  <View></View> 
+                ); 
               }
-              return (
-                <View >
-                  <Text style={styles.categoryName}> {categoryName} </Text>
-                    {category.filter(task => !task.isArchived).map((task, index) =>
-                      <Task task={task} onDismissal={this.onDismissal.bind(this, task.id)} key={task.id}/>
-                    )}
-                </View>
-              );
+              
             }
           }
         />

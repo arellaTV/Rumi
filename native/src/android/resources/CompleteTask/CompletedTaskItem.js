@@ -17,21 +17,17 @@ class CompletedTask extends React.Component {
     var task = props.data.task;
     var user = props.data.user;
     return (
-      <View>
-        <TouchableNativeFeedback
-          onPress={props._onPressButton}
-          background={TouchableNativeFeedback.SelectableBackground()}>
-          <View style={styles.taskCard}>
-            <Text style={styles.titleText}> {task.name} </Text>
-            <Text style={styles.titleText}> <TimeAgo time={task.updatedAt} /> </Text>
-            <Text style={styles.titleText}> {user.name} </Text>
-            <View style={styles.taskElements}>
-              <TouchableHighlight onPress={this.onDismissal} >
-                <Icon name="check-square-o" size={40} color="#28BF32" />
-              </TouchableHighlight>
-            </View>
+      <View style={styles.taskCard}>
+        <Text style={styles.titleText}> {task.name} </Text>
+        <View style={{flexDirection: 'row'}}>
+          <View style={{width: 50}}>
+            <Icon name="check-square-o" size={40} color="#28BF32" />
           </View>
-        </TouchableNativeFeedback>
+          <View style={{flexDirection: 'column'}}> 
+            <Text style={styles.baseText}> Completed: <TimeAgo time={task.updatedAt} /> </Text>
+            <Text style={styles.baseText}> Thanks to: {user.name} </Text>
+          </View>
+        </View>
       </View>
     )
   }

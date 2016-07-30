@@ -93,7 +93,7 @@ input {
   height: 40;
 }
 
-// Task List View
+// All Task and Completed Task List View
 
 .taskList {
   background-color: $primaryColor;
@@ -120,7 +120,7 @@ input {
 .taskElements {
   flex-direction: row;
   justify-content: space-between;
-  align-items: flex-end;
+  align-items: center;
 }
 
 .taskText {
