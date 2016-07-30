@@ -1,8 +1,21 @@
 import './UserAgent';
 import io from 'socket.io-client/socket.io';
+import host from './env';
+var socket;
 
-var socket = io('http://138.68.14.133:3000', {
-  transports: ['websocket']
-});
+function connectSocket(auth) {
+  socket = io(host, {
+    transports: ['websocket'],
+    query: 'auth=' + auth
+  });
+}
 
-export default socket;
+function getSocket() {
+  if (socket) {
+    return socket;
+  } else {
+    throw 'socket not connected';
+  }
+}
+
+export { connectSocket, getSocket };

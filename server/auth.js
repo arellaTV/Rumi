@@ -29,6 +29,10 @@ var verifyToken = function(token) {
   });
 };
 
+var getUserFromToken = function(jwt) {
+  return User.findByEmail(jwt.body.sub);
+};
+
 var login = function(email, password) {
   return new Promise(function(resolve, reject) {
     User.findByEmail(email).then(user => {
@@ -149,5 +153,7 @@ function isAuth(req, res, next) {
 
 module.exports = {
   routes,
-  isAuth
+  getUserFromToken,
+  isAuth,
+  verifyToken
 };

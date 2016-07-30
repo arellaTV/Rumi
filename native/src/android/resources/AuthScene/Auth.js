@@ -1,13 +1,9 @@
 import {
   AsyncStorage
 } from 'react-native';
-
-var host =
-         //'http://192.168.56.1:3000';
-         'http://138.68.14.133:3000';
+import host from '../../env.js';
 
 var login = function(userInfo) {
-  console.log(userInfo);
   return fetch(host + '/auth/local', {
     method: 'POST',
     headers: {

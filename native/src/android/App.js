@@ -4,6 +4,8 @@ import {
   NavigationExperimental as Navigator,
   Text
 } from 'react-native';
+import { getToken } from './resources/AuthScene/Auth';
+import { connectSocket } from './socketClient';
 import TaskScene from './resources/TaskScene/TaskScene';
 import AuthScene from './resources/AuthScene/AuthScene';
 
@@ -80,7 +82,11 @@ class App extends Component {
   }
 
   onLoginSuccess() {
-    this.setState(Object.assign({}, this.state, {loggedIn: true}));
+    return getToken()
+      .then((token) => connectSocket(token))
+      .then(() => {
+        this.setState(Object.assign({}, this.state, {loggedIn: true}))
+      });
   }
 
   _onNavigationChange(type, route) {
