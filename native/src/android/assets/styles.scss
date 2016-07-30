@@ -174,24 +174,18 @@ input {
   background-color: $secondaryColor;
   justify-content: flex-start;
   align-items: flex-start;
-  flex: 1
+  flex: 1;
 }
 
 .indivMenu {
   flex-direction: row;
   justify-content: flex-start;
-  align-items: stretch;
   padding: 10;
-  padding-bottom: 15;
 }
 
 .indivMenuActive {
+  @extend .indivMenu;
   background-color: $accentColor;
-  flex-direction: row;
-  justify-content: flex-start;
-  flex: 1;
-  padding: 10;
-  padding-bottom: 15;
 }
 
 .menuText {
