@@ -5,9 +5,8 @@ import {
   Text,
   View
 } from 'react-native';
-
+import CompletedTask from './CompletedTaskItem';
 import { getSocket } from '../../socketClient';
-import Task from '../TaskList/TaskItem';
 import styles from '../../assets/styles.js';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -30,17 +29,23 @@ class CompleteTask extends Component {
   render() {
     return (
       <View style={styles.taskList}>
+        <Text>Completed Tasks</Text>
         <ListView
           dataSource={this.ds.cloneWithRows(this.state.completedTasks)}
           enableEmptySections={true}
           renderRow={
-            (task, section, index) => {
-              return (
-                <View>
-                  <Text>Completed Tasks</Text>
-                  <Task task={task} />
-                </View>
-              );
+            (data, section, index) => {
+              if (data.task) {
+                return (
+                  <View>
+                  <CompletedTask data={data} />
+                  </View>
+                );
+              } else {
+                return (
+                  <View></View>
+                );
+              }
             }
           }
         />

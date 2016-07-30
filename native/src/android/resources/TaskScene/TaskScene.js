@@ -4,7 +4,7 @@ import AddTask from '../AddTask/AddTaskView';
 import TappableRow from '../stateless/TappableRow';
 import MenuBar from '../stateless/MenuBar';
 import TaskList from '../TaskList/TaskListView';
-import CompletedTaskList from '../CompleteTask/CompleteTaskView';
+import CompletedTaskList from '../CompleteTask/CompleteTaskListView';
 
 export default class TaskScene extends React.Component {
   getView(targetView) {
