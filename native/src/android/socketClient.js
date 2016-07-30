@@ -1,10 +1,10 @@
 import './UserAgent';
 import io from 'socket.io-client/socket.io';
-
+import host from './env';
 var socket;
 
 function connectSocket(auth) {
-  socket = io('http://138.68.14.133:3000', {
+  socket = io(host, {
     transports: ['websocket'],
     extraHeaders: {
       Authorization: auth

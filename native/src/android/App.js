@@ -85,7 +85,6 @@ class App extends Component {
     return getToken()
       .then((token) => connectSocket(token))
       .then(() => {
-        console.log('what');
         this.setState(Object.assign({}, this.state, {loggedIn: true}))
       });
   }
