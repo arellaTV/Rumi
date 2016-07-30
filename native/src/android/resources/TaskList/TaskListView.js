@@ -63,11 +63,10 @@ class TaskListView extends Component {
     return tasks;
   }
 
-  onDismissal(index, row) {
-    var tasks = [this.state.overdueTasks, this.state.urgentTasks, this.state.upcomingTasks];
-    var currentCategory = tasks[row];
-    var removedTask = currentCategory[index];
-    this.socket.emit('complete task', removedTask.id);
+  onDismissal(id) {
+    this.socket.emit('complete task', id);
+    this.socket.emit('archive task', id);
+    this.socket.emit('get all tasks');
     // this.setState({
     //   currentCategory: currentCategory
     // })
@@ -89,8 +88,8 @@ class TaskListView extends Component {
               return (
                 <View >
                   <Text style={styles.categoryName}> {categoryName} </Text>
-                    {category.map((task, index) =>
-                      <Task task={task} onDismissal={this.onDismissal.bind(this, index, row)} key={index}/>
+                    {category.filter(task => !task.isArchived).map((task, index) =>
+                      <Task task={task} onDismissal={this.onDismissal.bind(this, task.id)} key={task.id}/>
                     )}
                 </View>
               );
